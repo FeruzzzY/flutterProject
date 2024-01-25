@@ -20,7 +20,9 @@ module.exports = {
     extend: {
       colors: {
         ...defaultColors,
-        bTest: "#14328e",
+        dark: "#23262F",
+        gray: "#E8E9EB",
+        grayDark: "#6E7179",
       },
 
       boxShadow: {},
