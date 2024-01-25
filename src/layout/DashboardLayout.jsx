@@ -1,11 +1,14 @@
 import React from "react";
-import { SideBar } from "../components/dashboard-layout";
+import { SideBar, NavigationDashboard } from "../components/dashboard-layout";
 
 const DashboardLayout = ({ children }) => {
   return (
-    <div className="flex">
+    <div className="flex w-full">
       <SideBar />
-      {children}
+      <div className="w-[calc(100%_-_350px)]">
+        <NavigationDashboard />
+        <div className="p-6">{children}</div>
+      </div>
     </div>
   );
 };

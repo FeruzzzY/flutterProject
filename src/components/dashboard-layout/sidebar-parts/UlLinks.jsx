@@ -71,7 +71,7 @@ const UlLinks = ({ link, text }) => {
         {list_sub?.map((item, index) => {
           const { text, icon, link } = item;
           return (
-            <li key={index} className="w-full my-1">
+            <li key={index} className="w-full my-0.5">
               <NavLink
                 end
                 to={link}
@@ -86,7 +86,7 @@ const UlLinks = ({ link, text }) => {
             </li>
           );
         })}
-        <li className="w-full my-1">
+        <li className="w-full my-0.5">
           <div className="flex items-center w-full p-4 rounded-xl gap-3 text-xl font-semibold text-grayDark cursor-pointer hover:bg-gray hover:text-dark duration-150">
             <LogOutIcon /> <span className="">Log out</span>
           </div>

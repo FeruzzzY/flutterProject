@@ -22,6 +22,7 @@ module.exports = {
         ...defaultColors,
         dark: "#23262F",
         gray: "#E8E9EB",
+        dodgerBlue: "#2A85FF",
         grayDark: "#6E7179",
       },
 
