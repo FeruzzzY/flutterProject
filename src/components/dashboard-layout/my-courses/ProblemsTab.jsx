@@ -8,7 +8,9 @@ import TextSize20 from "../../texts/TextSize20";
 const ProblemsTab = ({ detail }) => {
   return (
     <>
-      <TextSize20>{detail?.title}</TextSize20>
+      <TextSize20>
+        {detail?.id}.{detail?.title}
+      </TextSize20>
       <div className=" mt-2 pb-4 border-b border-b-gray">
         <p className="text-xs font-medium text-black">
           <span className="text-grayDark">Time limit: </span>:{" "}

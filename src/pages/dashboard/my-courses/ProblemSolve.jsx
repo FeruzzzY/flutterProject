@@ -25,6 +25,15 @@ const ProblemSolve = () => {
     {
       title: "Submit",
     },
+    {
+      title: "Status",
+    },
+    {
+      title: "My status",
+    },
+    {
+      title: "Comments",
+    },
   ];
 
   const getProblems = () => {
@@ -64,7 +73,7 @@ const ProblemSolve = () => {
         {tab === 1 ? <ProblemsTab detail={detail} /> : null}
       </CardRounded16>
 
-      <CouldNotSolve
+      {/* <CouldNotSolve
         info={{
           title: "Couldn't solve the problem?",
           sub_title: `If you failed to solve this clue in 1st attempt, you will be
@@ -73,7 +82,7 @@ const ProblemSolve = () => {
           desc: `Note: You will be given 2 penalty examples for failing to solve this example. 
           In addition, you will be provided with an additional video tutorial on how to solve this problem.`,
         }}
-      />
+      /> */}
     </>
   );
 };

@@ -9,10 +9,10 @@ const DashboardLayout = ({ children }) => {
     <>
       {loading ? <Loading /> : ""}
       <div className="flex w-full">
-        <div className="fixed top-0 left-0 z-[99] lg:w-[350px] lg:block hidden">
+        <div className="fixed top-0 left-0 z-[99] lg:w-[300px] lg:block hidden">
           <SideBar />
         </div>
-        <div className="lg:ml-[350px] lg:w-[calc(100%_-_350px)] w-full">
+        <div className="lg:ml-[300px] lg:w-[calc(100%_-_300px)] w-full">
           <NavigationDashboard />
           <div className="p-6">{children}</div>
         </div>
