@@ -24,6 +24,9 @@ module.exports = {
         gray: "#E8E9EB",
         dodgerBlue: "#2A85FF",
         grayDark: "#6E7179",
+        redLight: "#F8ECEE",
+        red: "#CE5A67",
+        grayLight: "#fcfcfd",
       },
 
       boxShadow: {},

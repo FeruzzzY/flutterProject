@@ -6,3 +6,5 @@ export { default as PaymentsIcon } from "./PaymentsIcon";
 export { default as SettingsIcon } from "./SettingsIcon";
 export { default as HelpIcon } from "./HelpIcon";
 export { default as LogOutIcon } from "./LogOutIcon";
+export { default as CloneIcon } from "./CloneIcon";
+export { default as BackIcon } from "./BackIcon";

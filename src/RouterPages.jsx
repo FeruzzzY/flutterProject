@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet, Route, Routes } from "react-router-dom";
-import { ProblemSolve } from "./pages/dashboard/my-courses";
+import { ProblemSolve, ProblemSolveList } from "./pages/dashboard/my-courses";
 import { PageNFound } from "./components";
 import { DashboardLayout, Layout } from "./layout";
 import { Home, Ui } from "./pages/client";
@@ -35,6 +35,12 @@ const RouterPages = () => {
         >
           <Route index element={<Dashboard />} />
           <Route path="problem-solve" element={<ProblemSolve />} />
+          <Route path="problem-solve">
+            <Route index element={<ProblemSolveList />} />
+            <Route path=":id">
+              <Route index element={<ProblemSolve />} />
+            </Route>
+          </Route>
 
           <Route path="certificates">
             <Route index element={<Certificates />} />

@@ -4,7 +4,7 @@ import { UlLinks } from "./sidebar-parts";
 
 const SideBar = () => {
   return (
-    <div className="w-[350px] pt-7 px-6 flex flex-col h-full border-r border-r-[#E8E9EB]">
+    <div className=" pt-7 px-6 flex flex-col h-full border-r border-r-[#E8E9EB] bg-white">
       <Brand />
       <UlLinks />
     </div>
