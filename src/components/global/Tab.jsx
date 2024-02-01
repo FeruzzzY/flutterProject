@@ -8,7 +8,7 @@ const Tab = ({ tabList, tab, handleTab }) => {
           <div
             key={index}
             onClick={() => handleTab(index + 1)}
-            className={`relative mr-[61px] last-of-type:mr-0 cursor-pointer z-10 pb-2 border-b border-b-gray
+            className={`relative mr-[61px] last-of-type:mr-0 cursor-pointer z-10 pb-2 border-b border-b-dodgerBlue
             hover:border-b-dodgerBlue hover:text-dodgerBlue duration-150 text-xs font-semibold ${
               tab === index + 1
                 ? "text-dodgerBlue border-b-dodgerBlue"
