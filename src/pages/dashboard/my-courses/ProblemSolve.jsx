@@ -9,6 +9,9 @@ import CouldNotSolve from "../../../components/dashboard-layout/my-courses/Could
 import CardRounded16 from "../../../components/cards/CardRounded16";
 import { useParams } from "react-router-dom";
 import Back from "../../../components/Back";
+import ProblemsSubmit from "../../../components/dashboard-layout/my-courses/ProblemsSubmit";
+import TextSize20 from "../../../components/texts/TextSize20";
+import { formatBytes } from "../../../helpers/another_functions";
 
 const ProblemSolve = () => {
   const [tab, setTab] = useState(1);
@@ -70,7 +73,24 @@ const ProblemSolve = () => {
       <Tab tabList={tabList} handleTab={handleTab} tab={tab} />
 
       <CardRounded16>
-        {tab === 1 ? <ProblemsTab detail={detail} /> : null}
+        <TextSize20>
+          {detail?.id}.{detail?.title}
+        </TextSize20>
+        <div className=" mt-2 pb-4 border-b border-b-gray">
+          <p className="text-xs font-medium text-black">
+            <span className="text-grayDark">Time limit: </span>:{" "}
+            {detail?.time_limit ? detail?.time_limit + " ms" : "-"}
+          </p>
+          <p className="text-xs font-medium text-black">
+            <span className="text-grayDark">Memory limit: </span>:{" "}
+            {detail?.memory_limit ? formatBytes(detail?.memory_limit) : "-"}
+          </p>{" "}
+        </div>
+        {tab === 1 ? (
+          <ProblemsTab detail={detail} />
+        ) : tab === 2 ? (
+          <ProblemsSubmit detail={detail} />
+        ) : null}
       </CardRounded16>
 
       {/* <CouldNotSolve

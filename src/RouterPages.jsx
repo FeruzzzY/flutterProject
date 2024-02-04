@@ -9,6 +9,7 @@ import { Certificates } from "./pages/dashboard/certificates";
 import { Payments } from "./pages/dashboard/payments";
 import { Settings } from "./pages/dashboard/settings";
 import { Help } from "./pages/dashboard/help";
+import Login from "./pages/client/auth/Login";
 
 const RouterPages = () => {
   return (
@@ -23,6 +24,7 @@ const RouterPages = () => {
         <Route path="/">
           <Route index element={<Home />} />
           <Route path="ui" element={<Ui />} />
+          <Route path="login" element={<Login />} />
         </Route>
       </Route>
       <Route path="/dashboard">

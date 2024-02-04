@@ -1,28 +1,32 @@
 .Toastify__toast {
-	border-radius: 8px;
-	box-shadow: 0 1px 10px 0 rgba(13, 46, 105, 0.04),
-		0 1px 10px 0 rgba(13, 46, 105, 0.03);
-	color: var(--bold);
-	font-family: 'Gilroy', sans-serif;
-	font-weight: 600;
-	font-size: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 10px 0 rgba(13, 46, 105, 0.04),
+    0 1px 10px 0 rgba(13, 46, 105, 0.03);
+  color: var(--bold);
+  font-family: "Gilroy", sans-serif;
+  font-weight: 600;
+  font-size: 15px;
 }
 .Toastify__toast--warning .Toastify__progress-bar {
-	background-color: var(--toastify-color-warning);
+  background-color: var(--toastify-color-warning);
 }
 .Toastify__toast--success .Toastify__progress-bar {
-	background-color: var(--toastify-color-success);
+  background-color: var(--toastify-color-success);
 }
 .Toastify__toast--error .Toastify__progress-bar {
-	background-color: var(--toastify-color-error);
+  background-color: #e74c3c;
+  color: #e74c3c;
 }
 .Toastify__toast--info .Toastify__progress-bar {
-	background-color: var(--toastify-color-info);
+  background-color: var(--toastify-color-info);
 }
 .Toastify__close-button {
-	opacity: 1;
-	color: var(--bold);
+  opacity: 1;
+  color: var(--bold);
 }
 .Toastify__close-button svg {
-	fill: var(--bold);
+  fill: var(--bold);
+}
+.Toastify__toast-body > div {
+  color: gray !important;
 }

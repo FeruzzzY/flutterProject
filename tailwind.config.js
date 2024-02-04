@@ -27,14 +27,17 @@ module.exports = {
         redLight: "#F8ECEE",
         red: "#CE5A67",
         grayLight: "#fcfcfd",
+        blue: "#2A85FF",
       },
-
-      boxShadow: {},
       zIndex: {
         9999: "9999",
         999: "999",
       },
       fontSize: {},
+      boxShadow: {
+        blueShadow:
+          "0px 101px 40px rgba(0, 87, 255, 0.02), 0px 57px 34px rgba(0, 87, 255, 0.08), 0px 25px 25px rgba(0, 87, 255, 0.13), 0px 6px 14px rgba(0, 87, 255, 0.15)",
+      },
     },
     fontFamily: {
       inter: ["Inter", "sans-serif"],

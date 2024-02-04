@@ -52,7 +52,7 @@ const ProblemSolveList = () => {
         <Table
           th={
             <tr className="text-left">
-              <Th>Problem number</Th>
+              <Th className="!min-w-[40px]">№</Th>
               <Th>Title</Th>
               <Th>Status</Th>
               <Th></Th>
@@ -61,7 +61,7 @@ const ProblemSolveList = () => {
           td={list?.map((item, index) => {
             return (
               <tr className="text-left" key={index}>
-                <Td>{item?.id}</Td>
+                <Td className="!min-w-[40px]">{item?.id}</Td>
                 <Td>{item?.title}</Td>
                 <Td>
                   <span className="py-1 px-2 text-grayDark bg-gray rounded-lg">

@@ -2,6 +2,7 @@ import React from "react";
 import { SideBar, NavigationDashboard } from "../components/dashboard-layout";
 import Loading from "../components/Loading";
 import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
 
 const DashboardLayout = ({ children }) => {
   const { loading } = useSelector((state) => state);
@@ -17,6 +18,8 @@ const DashboardLayout = ({ children }) => {
           <div className="p-6">{children}</div>
         </div>
       </div>
+
+      <ToastContainer />
     </>
   );
 };
