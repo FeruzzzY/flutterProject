@@ -45,7 +45,7 @@ const Login = () => {
           const token = res?.data?.access_token ?? "";
           setToken(token);
           localStorage.setItem("token", token);
-          navigate("/");
+          navigate("/dashboard/problem-solve");
           window.scrollTo({
             top: 0,
             left: 0,

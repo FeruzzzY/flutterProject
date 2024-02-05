@@ -18,6 +18,7 @@ import MyStatusSolution from "../../../components/dashboard-layout/my-courses/My
 const ProblemSolve = () => {
   const [tab, setTab] = useState(1);
   const [detail, setDetail] = useState({});
+  const [statusMy, setStatusMy] = useState([]);
 
   const { id } = useParams();
   const { t, i18n } = useTranslation();
@@ -55,8 +56,53 @@ const ProblemSolve = () => {
       });
   };
 
+  const getResultStatusMy = () => {
+    dispatch(setLoading(true));
+    GetAuthInstance()
+      .get(`api/v1/results?problem_id=${id}&my=1&per_page=${100}&page=${1}`)
+      .then((res) => {
+        let data = res?.data?.data?.data;
+
+        // Agar arrayda misol uchun 5ta object nomi
+        // 1xil bolganda va 2-3 ta boshqa nomdagi objectlar
+        // bolganda. Va shu holatda 1xil nomdagi objectlardan oxirgisini
+        // qolgan nomdagi objectlar bilan birga arrayda qoldirish kerak bolib
+        // qolgan 1xil nomdagi objectlarni o"chirish kerak bo"lganda ishlatilindi
+
+        const groupedByName = data?.reduce((acc, current) => {
+          acc[current.compiler.display_name] =
+            acc[current.compiler.display_name] || [];
+          acc[current.compiler.display_name].push(current);
+          return acc;
+        }, {});
+
+        const resultArray = [];
+
+        Object.values(groupedByName).forEach((group) => {
+          const highestIdObject = group.reduce((acc, current) =>
+            current.id > acc.id ? current : acc
+          );
+          resultArray.push({
+            id: highestIdObject?.id,
+            compiler_id: highestIdObject?.compiler?.id,
+            display_name: highestIdObject?.compiler?.display_name,
+            source: highestIdObject?.source,
+          });
+        });
+
+        setStatusMy(resultArray || []);
+      })
+      .catch((error) => {
+        setStatusMy([]);
+      })
+      .finally(() => {
+        dispatch(setLoading(false));
+      });
+  };
+
   useEffect(() => {
     getProblems();
+    getResultStatusMy();
     window.scrollTo({
       top: 0,
       left: 0,
@@ -77,7 +123,7 @@ const ProblemSolve = () => {
         {tab === 1 ? (
           <ProblemsTab detail={detail} />
         ) : tab === 2 ? (
-          <ProblemsSubmit detail={detail} />
+          <ProblemsSubmit detail={detail} statusMy={statusMy} />
         ) : tab === 3 ? (
           <StatusSolution id={id} />
         ) : tab === 4 ? (

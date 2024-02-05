@@ -15,7 +15,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { formatBytes } from "../../../helpers/another_functions";
 
-const ProblemsSubmit = ({ detail, getResultStatusAllUsers }) => {
+const ProblemsSubmit = ({ detail, statusMy }) => {
   // *compiler functions
   const hightlightWithLineNumbers = (input, language) =>
     highlight(input, language)
@@ -25,8 +25,8 @@ const ProblemsSubmit = ({ detail, getResultStatusAllUsers }) => {
   // *compiler functions
 
   const [compilers, setCompilers] = useState([]);
-  const [codeValue, setCodeValue] = useState(``);
   const [activeCompiler, setActiveCompiler] = useState();
+  const [codeValue, setCodeValue] = useState(``);
   const [solutionError, setSolutionError] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -34,9 +34,12 @@ const ProblemsSubmit = ({ detail, getResultStatusAllUsers }) => {
 
   const chooseNewCompiler = (id) => {
     let f = compilers?.filter((e) => e?.id === id);
+    let fMy = statusMy?.filter((e) => e?.compiler_id === f[0]?.id);
     setActiveCompiler(f[0]);
-    setCodeValue(``);
+    setCodeValue(fMy?.length > 0 ? fMy[0]?.source : ``);
   };
+
+  console.log(activeCompiler, statusMy);
 
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
@@ -57,8 +60,19 @@ const ProblemsSubmit = ({ detail, getResultStatusAllUsers }) => {
       .get(`api/v1/compilers`)
       .then((res) => {
         let data = res?.data?.data;
+        let compilerActive = data?.find((e) => e?.display_name === "Dart");
+
+        if (compilerActive !== undefined) {
+          setActiveCompiler(compilerActive);
+        } else {
+          setActiveCompiler(data?.[0]);
+        }
+        let fMy = statusMy?.filter(
+          (e) => e?.compiler_id === compilerActive?.id
+        );
+
         setCompilers(data);
-        setActiveCompiler(data[0]);
+        setCodeValue(fMy?.length > 0 ? fMy[0]?.source : ``);
       })
       .catch((error) => {})
       .finally(() => {
@@ -99,8 +113,6 @@ const ProblemsSubmit = ({ detail, getResultStatusAllUsers }) => {
             left: 0,
             behavior: "smooth",
           });
-          setCodeValue(``);
-          getResultStatusAllUsers();
         })
         .catch((error) => {
           console.log(error);
