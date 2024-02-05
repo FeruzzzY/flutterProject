@@ -10,28 +10,139 @@ import Table from "../../../components/table/Table";
 import { Link } from "react-router-dom";
 import Th from "../../../components/table/Th";
 import Td from "../../../components/table/Td";
+import CustomPagination from "../../../components/global/CustomPagination";
 
 const ProblemSolveList = () => {
+  const optionsShowPageSize = [
+    { value: "20", text: "show 20" },
+    { value: "50", text: "show 50" },
+    { value: "100", text: "show 100" },
+    { value: "200", text: "show 200" },
+  ];
+  const [count, setCount] = useState(1);
+  const [obj, setObj] = useState({
+    p_size: optionsShowPageSize[0].value,
+    page: 1,
+  });
+  const [typingTimeOut, setTypingTimeOut] = useState(0);
   const [list, setList] = useState([]);
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
 
-  const getProblemsList = () => {
+  //****** Pagination functions start ********/
+  const handleShowPageSize = (e) => {
+    setObj((pV) => ({
+      ...pV,
+      p_size: e.target.value,
+    }));
+    getProblemsList(e.target.value, obj?.page);
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+  const handleGoToPage = (e) => {
+    setObj((pV) => ({
+      ...pV,
+      page: e.target.value,
+    }));
+    setTypingTimeOut(
+      setTimeout(() => {
+        getProblemsList(obj?.p_size, e.target.value);
+      }, 300)
+    );
+
+    if (typingTimeOut) {
+      clearTimeout(typingTimeOut);
+    }
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+  const toFirstPage = () => {
+    setObj((pV) => ({
+      ...pV,
+      page: 1,
+    }));
+
+    getProblemsList(obj?.p_size, 1);
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+  const singlePrevPage = () => {
+    setObj((pV) => ({
+      ...pV,
+      page: Math.max(obj?.page - 1, 1),
+    }));
+    getProblemsList(obj?.p_size, Math.max(obj?.page - 1, 1));
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+  const singleNextPage = () => {
+    setObj((pV) => ({
+      ...pV,
+      page: obj?.page + 1,
+    }));
+
+    getProblemsList(obj?.p_size, obj?.page + 1);
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+  const toLastPage = () => {
+    setObj((pV) => ({
+      ...pV,
+      page:
+        Math.round(count / obj?.p_size) < count / obj?.p_size
+          ? Math.round(count / obj?.p_size) + 1
+          : Math.round(count / obj?.p_size),
+    }));
+
+    getProblemsList(
+      obj?.p_size,
+      Math.round(count / obj?.p_size) < count / obj?.p_size
+        ? Math.round(count / obj?.p_size) + 1
+        : Math.round(count / obj?.p_size)
+    );
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+  //****** Pagination functions end ********/
+
+  const getProblemsList = (showPageSize, page) => {
     dispatch(setLoading(true));
     GetAuthInstance()
-      .get(`api/v1/problems`)
+      .get(`api/v1/problems?per_page=${showPageSize}&page=${page}`)
       .then((res) => {
         let data = res?.data?.data?.data;
+        let total = res?.data?.data?.total;
         setList(data);
+        setCount(total);
       })
-      .catch((error) => {})
+      .catch((error) => {
+        setList([]);
+      })
       .finally(() => {
         dispatch(setLoading(false));
       });
   };
 
   useEffect(() => {
-    getProblemsList();
+    getProblemsList(obj?.p_size, obj?.page);
 
     window.scrollTo({
       top: 0,
@@ -64,7 +175,22 @@ const ProblemSolveList = () => {
                 <Td className="!min-w-[40px]">{item?.id}</Td>
                 <Td>{item?.title}</Td>
                 <Td>
-                  <span className="py-1 px-2 text-grayDark bg-gray rounded-lg">
+                  <span
+                    className={`py-1 px-2 rounded-lg
+                 ${
+                   item?.status === -2 ||
+                   item?.status === -1 ||
+                   item?.status === 5 ||
+                   item?.status === 4 ||
+                   item?.status === 9
+                     ? "text-red bg-redLight"
+                     : item?.status === 6 || item?.status === 7
+                     ? "text-yellow-400 bg-yellow-100"
+                     : item?.status === 8 || item?.status === 0
+                     ? "text-green bg-greenLight"
+                     : "text-grayDark bg-gray"
+                 }`}
+                  >
                     {item?.status === -2
                       ? "Compile Error"
                       : item?.status === -1
@@ -108,6 +234,19 @@ const ProblemSolveList = () => {
               </tr>
             );
           })}
+        />
+
+        <CustomPagination
+          toFirstPage={toFirstPage}
+          singlePrevPage={singlePrevPage}
+          singleNextPage={singleNextPage}
+          toLastPage={toLastPage}
+          obj={obj}
+          count={count}
+          listData={list}
+          handleShowPageSize={handleShowPageSize}
+          optionsShowPageSize={optionsShowPageSize}
+          handleGoToPage={handleGoToPage}
         />
       </CardRounded16>
     </>

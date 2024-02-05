@@ -12,6 +12,8 @@ import Back from "../../../components/Back";
 import ProblemsSubmit from "../../../components/dashboard-layout/my-courses/ProblemsSubmit";
 import TextSize20 from "../../../components/texts/TextSize20";
 import { formatBytes } from "../../../helpers/another_functions";
+import StatusSolution from "../../../components/dashboard-layout/my-courses/StatusSolution";
+import MyStatusSolution from "../../../components/dashboard-layout/my-courses/MyStatusSolution";
 
 const ProblemSolve = () => {
   const [tab, setTab] = useState(1);
@@ -55,7 +57,6 @@ const ProblemSolve = () => {
 
   useEffect(() => {
     getProblems();
-
     window.scrollTo({
       top: 0,
       left: 0,
@@ -73,23 +74,14 @@ const ProblemSolve = () => {
       <Tab tabList={tabList} handleTab={handleTab} tab={tab} />
 
       <CardRounded16>
-        <TextSize20>
-          {detail?.id}.{detail?.title}
-        </TextSize20>
-        <div className=" mt-2 pb-4 border-b border-b-gray">
-          <p className="text-xs font-medium text-black">
-            <span className="text-grayDark">Time limit: </span>:{" "}
-            {detail?.time_limit ? detail?.time_limit + " ms" : "-"}
-          </p>
-          <p className="text-xs font-medium text-black">
-            <span className="text-grayDark">Memory limit: </span>:{" "}
-            {detail?.memory_limit ? formatBytes(detail?.memory_limit) : "-"}
-          </p>{" "}
-        </div>
         {tab === 1 ? (
           <ProblemsTab detail={detail} />
         ) : tab === 2 ? (
           <ProblemsSubmit detail={detail} />
+        ) : tab === 3 ? (
+          <StatusSolution id={id} />
+        ) : tab === 4 ? (
+          <MyStatusSolution id={id} />
         ) : null}
       </CardRounded16>
 

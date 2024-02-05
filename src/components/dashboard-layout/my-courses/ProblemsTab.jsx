@@ -8,6 +8,19 @@ import TextSize20 from "../../texts/TextSize20";
 const ProblemsTab = ({ detail }) => {
   return (
     <>
+      <TextSize20>
+        {detail?.id}.{detail?.title}
+      </TextSize20>
+      <div className=" mt-2 pb-4 border-b border-b-gray">
+        <p className="text-xs font-medium text-black">
+          <span className="text-grayDark">Time limit: </span>:{" "}
+          {detail?.time_limit ? detail?.time_limit + " ms" : "-"}
+        </p>
+        <p className="text-xs font-medium text-black">
+          <span className="text-grayDark">Memory limit: </span>:{" "}
+          {detail?.memory_limit ? formatBytes(detail?.memory_limit) : "-"}
+        </p>{" "}
+      </div>
       <div
         className="dangerouslySetInnerHTML mt-2 pb-4 border-b border-b-gray"
         dangerouslySetInnerHTML={{ __html: detail?.body }}

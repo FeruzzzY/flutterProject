@@ -135,3 +135,15 @@ body {
   font-weight: 100;
 }
 /* editor */
+
+/* input number arrow hide */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+/* input number arrow hide */

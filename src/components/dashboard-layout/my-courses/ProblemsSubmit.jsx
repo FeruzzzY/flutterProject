@@ -13,9 +13,9 @@ import "prismjs/components/prism-javascript";
 import "prismjs/themes/prism.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { formatBytes } from "../../../helpers/another_functions";
 
-
-const ProblemsSubmit = ({ detail }) => {
+const ProblemsSubmit = ({ detail, getResultStatusAllUsers }) => {
   // *compiler functions
   const hightlightWithLineNumbers = (input, language) =>
     highlight(input, language)
@@ -51,15 +51,6 @@ const ProblemsSubmit = ({ detail }) => {
     });
   }, [i18n.language]);
 
-  // const changeSolution = (e) => {
-  //   if (e.target.value) {
-  //     setSolutionError(false);
-  //   } else {
-  //     setSolutionError(true);
-  //   }
-  //   return setSolution(<pre>{e.target.value}</pre>);
-  // };
-
   const getCompilers = () => {
     dispatch(setLoading(true));
     GetAuthInstance()
@@ -88,7 +79,7 @@ const ProblemsSubmit = ({ detail }) => {
     const formData = new FormData();
     formData.append("compiler_id", activeCompiler?.id);
     formData.append("problem_id", detail?.id);
-    formData.append("contest_slug", 'contest-test-dart');
+    formData.append("contest_slug", "contest-test-dart");
     formData.append("solution", `${codeValue}`);
     if (t) {
       GetAuthInstance()
@@ -108,9 +99,11 @@ const ProblemsSubmit = ({ detail }) => {
             left: 0,
             behavior: "smooth",
           });
+          setCodeValue(``);
+          getResultStatusAllUsers();
         })
         .catch((error) => {
-          console.log(error)
+          console.log(error);
         })
         .finally(() => {
           dispatch(setLoading(false));
@@ -126,13 +119,21 @@ const ProblemsSubmit = ({ detail }) => {
     }
   };
 
-  
-
   return (
     <>
-      {/* <TextSize20 className={`${solutionError === true ? "text-red" : ""}`}>
-        Problem solution
-      </TextSize20> */}
+      <TextSize20>
+        {detail?.id}.{detail?.title}
+      </TextSize20>
+      <div className=" mt-2 pb-4 border-b border-b-gray">
+        <p className="text-xs font-medium text-black">
+          <span className="text-grayDark">Time limit: </span>:{" "}
+          {detail?.time_limit ? detail?.time_limit + " ms" : "-"}
+        </p>
+        <p className="text-xs font-medium text-black">
+          <span className="text-grayDark">Memory limit: </span>:{" "}
+          {detail?.memory_limit ? formatBytes(detail?.memory_limit) : "-"}
+        </p>{" "}
+      </div>
       <ProgrammingLanDropDown
         open={open}
         toggleDropdown={toggleDropdown}
