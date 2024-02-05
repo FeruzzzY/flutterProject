@@ -4,8 +4,49 @@ import CustomInput from "../../../components/forms/CustomInput";
 import Label from "../../../components/forms/Label";
 import { CloneIcon } from "../../../components/icons";
 import TextSize20 from "../../texts/TextSize20";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProblemsTab = ({ detail }) => {
+  const handleCopyInput = (val) => {
+    navigator.clipboard
+      .writeText(val)
+      .then(() => {
+        toast.success("Input value copied to clipboard:", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      })
+      .catch((error) => {
+        console.error("Unable to copy text to clipboard", error);
+        // Handle the error, e.g., show an error message to the user
+      });
+  };
+
+  const handleCopyOutPut = (val) => {
+    navigator.clipboard
+      .writeText(val)
+      .then(() => {
+        toast.success("Output value copied to clipboard:", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      })
+      .catch((error) => {
+        console.error("Unable to copy text to clipboard", error);
+        // Handle the error, e.g., show an error message to the user
+      });
+  };
   return (
     <>
       <TextSize20>
@@ -54,7 +95,9 @@ const ProblemsTab = ({ detail }) => {
                     className="pr-11 select-none"
                     disabled
                   />
-                  <CloneIcon className="absolute top-10 right-3" />
+                  <span onClick={() => handleCopyInput(sample_input)}>
+                    <CloneIcon className="absolute top-10 right-3" />
+                  </span>
                 </Label>
                 <Label title="Output" className="relative select-none">
                   <CustomInput
@@ -63,7 +106,10 @@ const ProblemsTab = ({ detail }) => {
                     className="pr-11 select-none"
                     disabled
                   />
-                  <CloneIcon className="absolute top-10 right-3" />
+
+                  <span onClick={() => handleCopyOutPut(sample_output)}>
+                    <CloneIcon className="absolute top-10 right-3" />
+                  </span>
                 </Label>
               </div>
             );
