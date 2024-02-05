@@ -84,27 +84,23 @@ body {
   background-color: #fcfcfd;
 }
 
-/* width */
+/* scroll */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
-
-/* Track */
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
-
-/* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888;
 }
-
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+/* scroll */
 
+/* dangerouslySetInnerHTML */
 .dangerouslySetInnerHTML > p {
   text-indent: 0 !important;
 }
@@ -113,3 +109,29 @@ body {
   font-family: "Inter", sans-serif !important;
   font-size: 14px !important;
 }
+/* dangerouslySetInnerHTML */
+
+/* editor */
+.editor {
+  counter-reset: line;
+  border: 1px solid #ced4da;
+}
+
+.editor #codeArea {
+  outline: none;
+  padding-left: 60px !important;
+}
+
+.editor pre {
+  padding-left: 60px !important;
+}
+
+.editor .editorLineNumber {
+  position: absolute;
+  left: 0px;
+  color: #cccccc;
+  text-align: right;
+  width: 40px;
+  font-weight: 100;
+}
+/* editor */

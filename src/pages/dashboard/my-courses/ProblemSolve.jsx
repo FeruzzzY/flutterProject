@@ -64,7 +64,7 @@ const ProblemSolve = () => {
   }, [i18n.language]);
 
   return (
-    <>
+    <div className="">
       <Back link="/dashboard/problem-solve" />
       <div className="px-4 py-2 border border-gray inline-flex rounded-[100px] text-sm font-semibold text-grayDark mb-3">
         Lesson 01
@@ -103,7 +103,7 @@ const ProblemSolve = () => {
           In addition, you will be provided with an additional video tutorial on how to solve this problem.`,
         }}
       /> */}
-    </>
+    </div>
   );
 };
 

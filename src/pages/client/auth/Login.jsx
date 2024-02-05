@@ -42,9 +42,9 @@ const Login = () => {
       GetAuthInstance()
         .post("api/v1/login", obj)
         .then((res) => {
-          const token = res?.data?.token ?? "";
+          const token = res?.data?.access_token ?? "";
           setToken(token);
-          localStorage.setItem("user_id", res?.data?.user?.id);
+          localStorage.setItem("token", token);
           navigate("/");
           window.scrollTo({
             top: 0,
