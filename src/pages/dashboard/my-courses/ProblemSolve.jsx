@@ -16,9 +16,21 @@ import StatusSolution from "../../../components/dashboard-layout/my-courses/Stat
 import MyStatusSolution from "../../../components/dashboard-layout/my-courses/MyStatusSolution";
 
 const ProblemSolve = () => {
+  const optionsShowPageSize = [
+    { value: "20", text: "show 20" },
+    { value: "50", text: "show 50" },
+    { value: "100", text: "show 100" },
+    { value: "200", text: "show 200" },
+  ];
+  const [obj, setObj] = useState({
+    p_size: optionsShowPageSize[0].value,
+    page: 1,
+  });
   const [tab, setTab] = useState(1);
   const [detail, setDetail] = useState({});
   const [statusMy, setStatusMy] = useState([]);
+  const [statusMyPagination, setStatusMyPagination] = useState([]);
+  const [count, setCount] = useState(1);
 
   const { id } = useParams();
   const { t, i18n } = useTranslation();
@@ -100,9 +112,30 @@ const ProblemSolve = () => {
       });
   };
 
+  const getResultStatusMyPagination = (showPageSize, page) => {
+    dispatch(setLoading(true));
+    GetAuthInstance()
+      .get(
+        `api/v1/results?problem_id=${id}&my=1&per_page=${showPageSize}&page=${page}`
+      )
+      .then((res) => {
+        let data = res?.data?.data?.data;
+        let total = res?.data?.data?.total;
+        setStatusMyPagination(data);
+        setCount(total);
+      })
+      .catch((error) => {
+        setStatusMyPagination([]);
+      })
+      .finally(() => {
+        dispatch(setLoading(false));
+      });
+  };
+
   useEffect(() => {
     getProblems();
     getResultStatusMy();
+    getResultStatusMyPagination(obj?.p_size, obj?.page);
     window.scrollTo({
       top: 0,
       left: 0,
@@ -123,11 +156,34 @@ const ProblemSolve = () => {
         {tab === 1 ? (
           <ProblemsTab detail={detail} />
         ) : tab === 2 ? (
-          <ProblemsSubmit detail={detail} statusMy={statusMy} />
+          <>
+            <ProblemsSubmit
+              detail={detail}
+              statusMy={statusMy}
+              getResultStatusMyPagination={() =>
+                getResultStatusMyPagination(obj?.p_size, obj?.page)
+              }
+            />
+            <MyStatusSolution
+              setObj={setObj}
+              obj={obj}
+              getResultStatusMyPagination={getResultStatusMyPagination}
+              statusMyPagination={statusMyPagination}
+              count={count}
+              optionsShowPageSize={optionsShowPageSize}
+            />
+          </>
         ) : tab === 3 ? (
           <StatusSolution id={id} />
         ) : tab === 4 ? (
-          <MyStatusSolution id={id} />
+          <MyStatusSolution
+            setObj={setObj}
+            obj={obj}
+            getResultStatusMyPagination={getResultStatusMyPagination}
+            statusMyPagination={statusMyPagination}
+            count={count}
+            optionsShowPageSize={optionsShowPageSize}
+          />
         ) : null}
       </CardRounded16>
 

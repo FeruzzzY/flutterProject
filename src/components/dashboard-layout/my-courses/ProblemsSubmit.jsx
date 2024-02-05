@@ -15,7 +15,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { formatBytes } from "../../../helpers/another_functions";
 
-const ProblemsSubmit = ({ detail, statusMy }) => {
+const ProblemsSubmit = ({ detail, statusMy, getResultStatusMyPagination }) => {
   // *compiler functions
   const hightlightWithLineNumbers = (input, language) =>
     highlight(input, language)
@@ -38,8 +38,6 @@ const ProblemsSubmit = ({ detail, statusMy }) => {
     setActiveCompiler(f[0]);
     setCodeValue(fMy?.length > 0 ? fMy[0]?.source : ``);
   };
-
-  console.log(activeCompiler, statusMy);
 
   const dispatch = useDispatch();
   const { t, i18n } = useTranslation();
@@ -113,6 +111,7 @@ const ProblemsSubmit = ({ detail, statusMy }) => {
             left: 0,
             behavior: "smooth",
           });
+          getResultStatusMyPagination();
         })
         .catch((error) => {
           console.log(error);
@@ -132,7 +131,7 @@ const ProblemsSubmit = ({ detail, statusMy }) => {
   };
 
   return (
-    <>
+    <div className="pb-16">
       <TextSize20>
         {detail?.id}.{detail?.title}
       </TextSize20>
@@ -177,7 +176,7 @@ const ProblemsSubmit = ({ detail, statusMy }) => {
           </button>
         </div>
       </form>
-    </>
+    </div>
   );
 };
 

@@ -9,19 +9,14 @@ import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { setLoading } from "../../../redux";
 
-const MyStatusSolution = ({ id }) => {
-  const optionsShowPageSize = [
-    { value: "20", text: "show 20" },
-    { value: "50", text: "show 50" },
-    { value: "100", text: "show 100" },
-    { value: "200", text: "show 200" },
-  ];
-  const [statusMy, setStatusMy] = useState([]);
-  const [count, setCount] = useState(1);
-  const [obj, setObj] = useState({
-    p_size: optionsShowPageSize[0].value,
-    page: 1,
-  });
+const MyStatusSolution = ({
+  setObj,
+  obj,
+  getResultStatusMyPagination,
+  statusMyPagination,
+  count,
+  optionsShowPageSize,
+}) => {
   const [typingTimeOut, setTypingTimeOut] = useState(0);
   const { i18n } = useTranslation();
   const dispatch = useDispatch();
@@ -32,7 +27,7 @@ const MyStatusSolution = ({ id }) => {
       ...pV,
       p_size: e.target.value,
     }));
-    getResultStatusMy(e.target.value, obj?.page);
+    getResultStatusMyPagination(e.target.value, obj?.page);
     window.scrollTo({
       top: 0,
       left: 0,
@@ -46,7 +41,7 @@ const MyStatusSolution = ({ id }) => {
     }));
     setTypingTimeOut(
       setTimeout(() => {
-        getResultStatusMy(obj?.p_size, e.target.value);
+        getResultStatusMyPagination(obj?.p_size, e.target.value);
       }, 300)
     );
 
@@ -65,7 +60,7 @@ const MyStatusSolution = ({ id }) => {
       page: 1,
     }));
 
-    getResultStatusMy(obj?.p_size, 1);
+    getResultStatusMyPagination(obj?.p_size, 1);
     window.scrollTo({
       top: 0,
       left: 0,
@@ -77,7 +72,7 @@ const MyStatusSolution = ({ id }) => {
       ...pV,
       page: Math.max(obj?.page - 1, 1),
     }));
-    getResultStatusMy(obj?.p_size, Math.max(obj?.page - 1, 1));
+    getResultStatusMyPagination(obj?.p_size, Math.max(obj?.page - 1, 1));
     window.scrollTo({
       top: 0,
       left: 0,
@@ -90,7 +85,7 @@ const MyStatusSolution = ({ id }) => {
       page: obj?.page + 1,
     }));
 
-    getResultStatusMy(obj?.p_size, obj?.page + 1);
+    getResultStatusMyPagination(obj?.p_size, obj?.page + 1);
     window.scrollTo({
       top: 0,
       left: 0,
@@ -106,7 +101,7 @@ const MyStatusSolution = ({ id }) => {
           : Math.round(count / obj?.p_size),
     }));
 
-    getResultStatusMy(
+    getResultStatusMyPagination(
       obj?.p_size,
       Math.round(count / obj?.p_size) < count / obj?.p_size
         ? Math.round(count / obj?.p_size) + 1
@@ -119,36 +114,6 @@ const MyStatusSolution = ({ id }) => {
     });
   };
   //****** Pagination functions end ********/
-
-  const getResultStatusMy = (showPageSize, page) => {
-    dispatch(setLoading(true));
-    GetAuthInstance()
-      .get(
-        `api/v1/results?problem_id=${id}&my=1&per_page=${showPageSize}&page=${page}`
-      )
-      .then((res) => {
-        let data = res?.data?.data?.data;
-        let total = res?.data?.data?.total;
-        setStatusMy(data);
-        setCount(total);
-      })
-      .catch((error) => {
-        setStatusMy([]);
-      })
-      .finally(() => {
-        dispatch(setLoading(false));
-      });
-  };
-
-  useEffect(() => {
-    getResultStatusMy(obj?.p_size, obj?.page);
-
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
-  }, [i18n.language]);
 
   return (
     <div>
@@ -163,7 +128,7 @@ const MyStatusSolution = ({ id }) => {
             <Th>State</Th>
           </tr>
         }
-        td={statusMy?.map((item, index) => {
+        td={statusMyPagination?.map((item, index) => {
           return (
             <tr className="text-left" key={index}>
               <Td className="!min-w-[40px]">{item?.id}</Td>
@@ -228,7 +193,7 @@ const MyStatusSolution = ({ id }) => {
         toLastPage={toLastPage}
         obj={obj}
         count={count}
-        listData={statusMy}
+        listData={statusMyPagination}
         handleShowPageSize={handleShowPageSize}
         optionsShowPageSize={optionsShowPageSize}
         handleGoToPage={handleGoToPage}
