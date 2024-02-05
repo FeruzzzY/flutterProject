@@ -137,12 +137,16 @@ const ProblemsSubmit = ({ detail, statusMy, getResultStatusMyPagination }) => {
       </TextSize20>
       <div className=" mt-2 pb-4 border-b border-b-gray">
         <p className="text-xs font-medium text-black">
-          <span className="text-grayDark">Time limit: </span>:{" "}
-          {detail?.time_limit ? detail?.time_limit + " ms" : "-"}
+          <span className="text-grayDark">
+            {t("problem_solve.time_limit")}:{" "}
+          </span>
+          : {detail?.time_limit ? detail?.time_limit + " ms" : "-"}
         </p>
         <p className="text-xs font-medium text-black">
-          <span className="text-grayDark">Memory limit: </span>:{" "}
-          {detail?.memory_limit ? formatBytes(detail?.memory_limit) : "-"}
+          <span className="text-grayDark">
+            {t("problem_solve.memory_limit")}:{" "}
+          </span>
+          : {detail?.memory_limit ? formatBytes(detail?.memory_limit) : "-"}
         </p>{" "}
       </div>
       <ProgrammingLanDropDown
@@ -172,7 +176,7 @@ const ProblemsSubmit = ({ detail, statusMy, getResultStatusMyPagination }) => {
             type="submit"
             className="p-4 rounded-[100px] bg-blue w-[261px]"
           >
-            Submit
+            {t("problem_solve.submit")}
           </button>
         </div>
       </form>

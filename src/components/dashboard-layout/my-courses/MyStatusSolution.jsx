@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Table from "../../table/Table";
 import TextSize20 from "../../texts/TextSize20";
 import Th from "../../table/Th";
 import Td from "../../table/Td";
 import CustomPagination from "../../global/CustomPagination";
-import { GetAuthInstance } from "../../../helpers/httpClient";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { setLoading } from "../../../redux";
-
 const MyStatusSolution = ({
   setObj,
   obj,
@@ -18,7 +15,7 @@ const MyStatusSolution = ({
   optionsShowPageSize,
 }) => {
   const [typingTimeOut, setTypingTimeOut] = useState(0);
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
 
   //****** Pagination functions start ********/
@@ -117,15 +114,15 @@ const MyStatusSolution = ({
 
   return (
     <div>
-      <TextSize20>My Status</TextSize20>
+      <TextSize20>{t("my_status_solution.my_status")}</TextSize20>
       <Table
         th={
           <tr className="text-left">
-            <Th className="!min-w-[40px]">ID</Th>
-            <Th>User</Th>
-            <Th>Problem ID</Th>
-            <Th>Name</Th>
-            <Th>State</Th>
+            <Th className="!min-w-[40px]">{t("my_status_solution.id")}</Th>
+            <Th>{t("my_status_solution.user")}</Th>
+            <Th>{t("my_status_solution.problem_id")}</Th>
+            <Th>{t("my_status_solution.name")}</Th>
+            <Th>{t("my_status_solution.status")}</Th>
           </tr>
         }
         td={statusMyPagination?.map((item, index) => {
@@ -153,31 +150,31 @@ const MyStatusSolution = ({
                  }`}
                 >
                   {item?.status === -2
-                    ? "Compile Error"
+                    ? t("status_problem.compile_error")
                     : item?.status === -1
-                    ? "Wrong Answer"
+                    ? t("status_problem.wrong_answer")
                     : item?.status === 0
-                    ? "Accepted"
+                    ? t("status_problem.accepted")
                     : item?.status === 1
-                    ? "Time Limit Exceed"
+                    ? t("status_problem.time_limit_exceed")
                     : item?.status === 2
-                    ? "Real Time Limit Exceed"
+                    ? t("status_problem.real_time_limit_exceed")
                     : item?.status === 3
-                    ? "Memory Limit Exceed"
+                    ? t("status_problem.memory_limit_exceed")
                     : item?.status === 4
-                    ? "Runtime Error"
+                    ? t("status_problem.runtime_error")
                     : item?.status === 5
-                    ? "System Error"
+                    ? t("status_problem.system_error")
                     : item?.status === 6
-                    ? "Pending"
+                    ? t("status_problem.pending")
                     : item?.status === 7
-                    ? "Judging"
+                    ? t("status_problem.judging")
                     : item?.status === 8
-                    ? "Partially Accepted"
+                    ? t("status_problem.partially_accepted")
                     : item?.status === 9
-                    ? "Compiler or problem or contest not found"
+                    ? t("status_problem.compiler_problem_not_found")
                     : item?.status === 10
-                    ? "Checking"
+                    ? t("status_problem.checking")
                     : null}
                 </span>
               </Td>

@@ -9,33 +9,35 @@ import {
   PaymentsIcon,
   SettingsIcon,
 } from "../../icons";
+import { useTranslation } from "react-i18next";
 
 const UlLinks = ({ link, text }) => {
+  const { t } = useTranslation();
   const list = [
     {
-      text: "My Courses",
+      text: t("sidebar_links.my_courses"),
       icon: <BookOpenIcon />,
       link: "/dashboard/problem-solve",
     },
     {
-      text: "Certificates",
+      text: t("sidebar_links.certificates"),
       icon: <CertificateIcon />,
       link: "/dashboard/certificates",
     },
     {
-      text: "Payments",
+      text: t("sidebar_links.payments"),
       icon: <PaymentsIcon />,
       link: "/dashboard/payments",
     },
     {
-      text: "Settings",
+      text: t("sidebar_links.settings"),
       icon: <SettingsIcon />,
       link: "/dashboard/settings",
     },
   ];
   const list_sub = [
     {
-      text: "Help",
+      text: t("sidebar_links.help"),
       icon: <HelpIcon />,
       link: "/dashboard/help",
     },
@@ -53,7 +55,7 @@ const UlLinks = ({ link, text }) => {
                 : "flex items-center w-full p-4 rounded-xl gap-3 text-xl font-semibold text-grayDark hover:bg-gray hover:text-dark duration-150"
             }
           >
-            <HomeIcon /> <span className="">Home</span>
+            <HomeIcon /> <span className="">{t("sidebar_links.home")}</span>
           </NavLink>
         </li>
         {list?.map((item, index) => {
@@ -95,7 +97,8 @@ const UlLinks = ({ link, text }) => {
         })}
         <li className="w-full my-0.5">
           <div className="flex items-center w-full p-4 rounded-xl gap-3 text-xl font-semibold text-grayDark cursor-pointer hover:bg-gray hover:text-dark duration-150">
-            <LogOutIcon /> <span className="">Log out</span>
+            <LogOutIcon />{" "}
+            <span className="">{t("sidebar_links.log_out")}</span>
           </div>
         </li>
       </ul>

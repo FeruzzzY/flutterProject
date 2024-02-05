@@ -13,11 +13,12 @@ import Td from "../../../components/table/Td";
 import CustomPagination from "../../../components/global/CustomPagination";
 
 const ProblemSolveList = () => {
+  const { t, i18n } = useTranslation();
   const optionsShowPageSize = [
-    { value: "20", text: "show 20" },
-    { value: "50", text: "show 50" },
-    { value: "100", text: "show 100" },
-    { value: "200", text: "show 200" },
+    { value: "20", text: `${t("pagination.show")} 20` },
+    { value: "50", text: `${t("pagination.show")} 50` },
+    { value: "100", text: `${t("pagination.show")} 100` },
+    { value: "200", text: `${t("pagination.show")} 200` },
   ];
   const [count, setCount] = useState(1);
   const [obj, setObj] = useState({
@@ -26,7 +27,6 @@ const ProblemSolveList = () => {
   });
   const [typingTimeOut, setTypingTimeOut] = useState(0);
   const [list, setList] = useState([]);
-  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
 
   //****** Pagination functions start ********/
@@ -159,13 +159,13 @@ const ProblemSolveList = () => {
       <TitleCabinet title="Matter for this lesson" />
 
       <CardRounded16>
-        <TextSize20>Problems</TextSize20>
+        <TextSize20>{t("tab_courses.problems")}</TextSize20>
         <Table
           th={
             <tr className="text-left">
               <Th className="!min-w-[40px]">№</Th>
-              <Th>Title</Th>
-              <Th>Status</Th>
+              <Th>{t("my_status_solution.title")}</Th>
+              <Th>{t("my_status_solution.status")}</Th>
               <Th></Th>
             </tr>
           }
@@ -192,31 +192,31 @@ const ProblemSolveList = () => {
                  }`}
                   >
                     {item?.status === -2
-                      ? "Compile Error"
+                      ? t("status_problem.compile_error")
                       : item?.status === -1
-                      ? "Wrong Answer"
+                      ? t("status_problem.wrong_answer")
                       : item?.status === 0
-                      ? "Accepted"
+                      ? t("status_problem.accepted")
                       : item?.status === 1
-                      ? "Time Limit Exceed"
+                      ? t("status_problem.time_limit_exceed")
                       : item?.status === 2
-                      ? "Real Time Limit Exceed"
+                      ? t("status_problem.real_time_limit_exceed")
                       : item?.status === 3
-                      ? "Memory Limit Exceed"
+                      ? t("status_problem.memory_limit_exceed")
                       : item?.status === 4
-                      ? "Runtime Error"
+                      ? t("status_problem.runtime_error")
                       : item?.status === 5
-                      ? "System Error"
+                      ? t("status_problem.system_error")
                       : item?.status === 6
-                      ? "Pending"
+                      ? t("status_problem.pending")
                       : item?.status === 7
-                      ? "Judging"
+                      ? t("status_problem.judging")
                       : item?.status === 8
-                      ? "Partially Accepted"
+                      ? t("status_problem.partially_accepted")
                       : item?.status === 9
-                      ? "Compiler or problem or contest not found"
+                      ? t("status_problem.compiler_problem_not_found")
                       : item?.status === 10
-                      ? "Checking"
+                      ? t("status_problem.checking")
                       : null}
                   </span>
                 </Td>
@@ -227,7 +227,7 @@ const ProblemSolveList = () => {
                       className="text-dodgerBlue border border-dodgerBlue px-6 py-3 rounded-[120px] duration-150 
                     hover:text-white hover:bg-dodgerBlue"
                     >
-                      Solve now
+                      {t("my_status_solution.solve_now")}
                     </Link>
                   </div>
                 </Td>

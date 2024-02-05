@@ -6,13 +6,15 @@ import { CloneIcon } from "../../../components/icons";
 import TextSize20 from "../../texts/TextSize20";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useTranslation } from "react-i18next";
 
 const ProblemsTab = ({ detail }) => {
+  const { t } = useTranslation();
   const handleCopyInput = (val) => {
     navigator.clipboard
       .writeText(val)
       .then(() => {
-        toast.success("Input value copied to clipboard:", {
+        toast.success(t("problem_solve.input_copied_clipboard"), {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -22,17 +24,14 @@ const ProblemsTab = ({ detail }) => {
           progress: undefined,
         });
       })
-      .catch((error) => {
-        console.error("Unable to copy text to clipboard", error);
-        // Handle the error, e.g., show an error message to the user
-      });
+      .catch((error) => {});
   };
 
   const handleCopyOutPut = (val) => {
     navigator.clipboard
       .writeText(val)
       .then(() => {
-        toast.success("Output value copied to clipboard:", {
+        toast.success(t("problem_solve.output_copied_clipboard"), {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -42,10 +41,7 @@ const ProblemsTab = ({ detail }) => {
           progress: undefined,
         });
       })
-      .catch((error) => {
-        console.error("Unable to copy text to clipboard", error);
-        // Handle the error, e.g., show an error message to the user
-      });
+      .catch((error) => {});
   };
   return (
     <>
@@ -54,12 +50,16 @@ const ProblemsTab = ({ detail }) => {
       </TextSize20>
       <div className=" mt-2 pb-4 border-b border-b-gray">
         <p className="text-xs font-medium text-black">
-          <span className="text-grayDark">Time limit: </span>:{" "}
-          {detail?.time_limit ? detail?.time_limit + " ms" : "-"}
+          <span className="text-grayDark">
+            {t("problem_solve.time_limit")}:{" "}
+          </span>
+          : {detail?.time_limit ? detail?.time_limit + " ms" : "-"}
         </p>
         <p className="text-xs font-medium text-black">
-          <span className="text-grayDark">Memory limit: </span>:{" "}
-          {detail?.memory_limit ? formatBytes(detail?.memory_limit) : "-"}
+          <span className="text-grayDark">
+            {t("problem_solve.memory_limit")}:{" "}
+          </span>
+          : {detail?.memory_limit ? formatBytes(detail?.memory_limit) : "-"}
         </p>{" "}
       </div>
       <div
@@ -67,14 +67,18 @@ const ProblemsTab = ({ detail }) => {
         dangerouslySetInnerHTML={{ __html: detail?.body }}
       />
       <div className="mt-2 pb-4 border-b border-b-gray">
-        <p className="text-base text-black font-semibold mb-2">Incoming data</p>
+        <p className="text-base text-black font-semibold mb-2">
+          {t("problem_solve.incoming_data")}
+        </p>
         <div
           className="dangerouslySetInnerHTML"
           dangerouslySetInnerHTML={{ __html: detail?.input_type }}
         />
       </div>
       <div className="mt-2 pb-4 border-b border-b-gray">
-        <p className="text-base text-black font-semibold mb-2">Outgoing data</p>
+        <p className="text-base text-black font-semibold mb-2">
+          {t("problem_solve.outgoing_data")}
+        </p>
         <div
           className="dangerouslySetInnerHTML"
           dangerouslySetInnerHTML={{ __html: detail?.output_type }}
@@ -90,7 +94,7 @@ const ProblemsTab = ({ detail }) => {
               >
                 <Label title="Input" className="relative select-none">
                   <CustomInput
-                    placeholder="Input value"
+                    placeholder={t("problem_solve.input_value")}
                     value={sample_input}
                     className="pr-11 select-none"
                     disabled
@@ -101,7 +105,7 @@ const ProblemsTab = ({ detail }) => {
                 </Label>
                 <Label title="Output" className="relative select-none">
                   <CustomInput
-                    placeholder="Output value"
+                    placeholder={t("problem_solve.output_value")}
                     value={sample_output}
                     className="pr-11 select-none"
                     disabled

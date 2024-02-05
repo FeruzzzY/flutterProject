@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { setLoading } from "../../../redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
   const [obj, setObj] = useState({});
@@ -19,6 +20,8 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
 
   const changeInput = (event) => {
     setObj({ ...obj, [event.target.name]: event.target.value });
@@ -51,7 +54,7 @@ const Login = () => {
             left: 0,
             behavior: "smooth",
           });
-          toast.success("Login successfully", {
+          toast.success(t("login.success_login"), {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -63,7 +66,7 @@ const Login = () => {
         })
         .catch((error) => {
           if (error.response.status === 401) {
-            toast.error("Error logging in ", {
+            toast.error(t("login.error_logging_in"), {
               position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
@@ -89,38 +92,44 @@ const Login = () => {
       <div className="lg:w-[50%] w-full lg:mt-0 mt-6 lg:mb-0 mb-6 p-4 flex items-center justify-center">
         <div>
           <p className="text-2xl lg:text-4xl font-bold text-black text-center">
-            Login
+            {t("login.success_login_title")}
           </p>
           <p className="text-xl font-medium text-black text-center mt-3">
-            Welcome back! Please log in to access your account.
+            {t("login.login_welcome")}
           </p>
           <form onSubmit={submitLogin} className="flex flex-col gap-6 mt-3">
             <Label title="Login">
               <CustomInput
-                placeholder="Enter your login"
+                placeholder={t("login.enter_your_login")}
                 name="name"
                 value={obj?.name}
                 onChange={changeInput}
               />
 
-              {objE.name ? <div className="text-red">Enter login</div> : ""}
+              {objE.name ? (
+                <div className="text-red">{t("login.enter_login")}</div>
+              ) : (
+                ""
+              )}
             </Label>
             <Label title="Password" className="relative">
               <CustomInput
                 type={showPassword ? "password" : "text"}
                 className="pr-[40px]"
-                placeholder="Enter your password"
+                placeholder={t("login.enter_your_password")}
                 name="password"
                 value={obj?.password}
                 onChange={changeInput}
               />
               {objE.password ? (
-                <div className="text-red">Enter password</div>
+                <div className="text-red">{t("login.enter_password")}</div>
               ) : (
                 ""
               )}
               <div className="flex justify-end w-full mt-3">
-                <span className="cursor-pointer">Forgot Password?</span>
+                <span className="cursor-pointer">
+                  {t("login.forgot_password")}
+                </span>
               </div>
               <div className="absolute top-[40px] right-3 z-10">
                 {showPassword ? (
@@ -136,13 +145,13 @@ const Login = () => {
                 )}
               </div>
             </Label>
-            <CustomCheckbox label="Remember Me" />
+            <CustomCheckbox label={t("login.remember_me")} />
             <button
               type="submit"
               className="bg-dodgerBlue w-full p-4 rounded-[100px] border-none duration-200 text-base
              font-semibold text-white hover:shadow-blueShadow"
             >
-              Login
+              {t("login.login_title")}
             </button>
           </form>
         </div>

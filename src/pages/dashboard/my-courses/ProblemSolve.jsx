@@ -16,11 +16,12 @@ import StatusSolution from "../../../components/dashboard-layout/my-courses/Stat
 import MyStatusSolution from "../../../components/dashboard-layout/my-courses/MyStatusSolution";
 
 const ProblemSolve = () => {
+  const { t, i18n } = useTranslation();
   const optionsShowPageSize = [
-    { value: "20", text: "show 20" },
-    { value: "50", text: "show 50" },
-    { value: "100", text: "show 100" },
-    { value: "200", text: "show 200" },
+    { value: "20", text: `${t("pagination.show")} 20` },
+    { value: "50", text: `${t("pagination.show")} 50` },
+    { value: "100", text: `${t("pagination.show")} 100` },
+    { value: "200", text: `${t("pagination.show")} 200` },
   ];
   const [obj, setObj] = useState({
     p_size: optionsShowPageSize[0].value,
@@ -33,24 +34,23 @@ const ProblemSolve = () => {
   const [count, setCount] = useState(1);
 
   const { id } = useParams();
-  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const handleTab = (i) => setTab(i);
   const tabList = [
     {
-      title: "Problems",
+      title: t("tab_courses.problems"),
     },
     {
-      title: "Submit",
+      title: t("tab_courses.submit"),
     },
     {
-      title: "Status",
+      title: t("tab_courses.status"),
     },
     {
-      title: "My status",
+      title: t("tab_courses.my_status"),
     },
     {
-      title: "Comments",
+      title: t("tab_courses.comments"),
     },
   ];
 

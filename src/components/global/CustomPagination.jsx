@@ -6,6 +6,7 @@ import { MdKeyboardArrowLeft } from "react-icons/md";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { useTranslation } from "react-i18next";
 
 const PaginationStyle = styled.div`
   display: flex;
@@ -121,6 +122,7 @@ const CustomPagination = ({
   optionsShowPageSize,
   handleGoToPage,
 }) => {
+  const { t } = useTranslation();
   return (
     <>
       <PaginationStyle>
@@ -128,34 +130,34 @@ const CustomPagination = ({
           <button
             className="pBtn"
             onClick={toFirstPage}
-            title="Первая страница"
+            title={t("pagination.first_page")}
           >
             <MdOutlineKeyboardDoubleArrowLeft size={20} />
           </button>
           <button
             className="pBtn"
             onClick={singlePrevPage}
-            title="Предыдущая страница"
+            title={t("pagination.previous_page")}
           >
             <MdKeyboardArrowLeft size={20} />
           </button>
           <button
             className="pBtn"
             onClick={singleNextPage}
-            title="Следущая страница"
+            title={t("pagination.next_page")}
           >
             <MdKeyboardArrowRight size={20} />
           </button>
           <button
             className="pBtn"
             onClick={toLastPage}
-            title="Последняя страница"
+            title={t("pagination.last_page")}
           >
             <MdOutlineKeyboardDoubleArrowRight size={20} />
           </button>
         </span>
         <p className="t1">
-          Page {obj?.page} of{" "}
+          {t("pagination.page")} {obj?.page} {t("pagination.of")}{" "}
           {Math.round(count / obj?.p_size) !== 0
             ? Math.round(count / obj?.p_size) < count / obj?.p_size
               ? Math.round(count / obj?.p_size) + 1
@@ -163,7 +165,7 @@ const CustomPagination = ({
             : 1}
         </p>
         <div className="numberpage">
-          | Go to page:{" "}
+          | {t("pagination.go_to_page")}:{" "}
           <div className="inputpage">
             <input
               type="number"
@@ -181,7 +183,7 @@ const CustomPagination = ({
               <button
                 className="inputpage_arrow1"
                 onClick={singleNextPage}
-                title="Следущая страница"
+                title={t("pagination.next_page")}
               >
                 <span>
                   <MdKeyboardArrowUp size={15} />
@@ -190,7 +192,7 @@ const CustomPagination = ({
               <button
                 className="inputpage_arrow2"
                 onClick={singlePrevPage}
-                title="Предыдущая страница"
+                title={t("pagination.previous_page")}
               >
                 <span>
                   <MdKeyboardArrowDown size={15} />
@@ -200,7 +202,8 @@ const CustomPagination = ({
           </div>
         </div>
         <div className="numberpage">
-          {listData?.length} of {count} items
+          {listData?.length} {t("pagination.of")} {count}{" "}
+          {t("pagination.items")}
         </div>
         <select value={obj?.p_size} onChange={handleShowPageSize}>
           {optionsShowPageSize.map((option) => (
