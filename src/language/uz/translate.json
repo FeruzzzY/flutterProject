@@ -9,14 +9,12 @@
       "help": "Help",
       "log_out": "Log out"
     },
-    "layout": {
-      "navigation": "Asosiy qismlar",
-      "catalog": "Katalog",
-      "category": "Hunarmandchilik",
-      "villages": "Qishloqlar",
-      "hotels": "Mehmonxonalar",
-      "restorans": "Oshxonalar",
-      "all_rights_reserved": "Barcha huquqlar himoyalangan."
+    "navbar": {
+      "benefits": "Benefits",
+      "our_courses": "Our courses",
+      "our_testimonials": "Our testimonials",
+      "faq": "FAQ",
+      "get_started": "Get started"
     },
     "my_status_solution": {
       "my_status": "My status",

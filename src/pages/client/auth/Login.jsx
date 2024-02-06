@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Label from "../../../components/forms/Label";
 import CustomInput from "../../../components/forms/CustomInput";
 import CustomCheckbox from "../../../components/forms/CustomCheckbox";
@@ -6,12 +6,13 @@ import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { GetAuthInstance } from "../../../helpers/httpClient";
 import { useDispatch } from "react-redux";
-import { setToken } from "../../../helpers/tokenStorage";
+import { issetToken, setToken } from "../../../helpers/tokenStorage";
 import { useNavigate } from "react-router-dom";
 import { setLoading } from "../../../redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useTranslation } from "react-i18next";
+import BaseButton from "../../../components/buttons/BaseButton";
 
 const Login = () => {
   const [obj, setObj] = useState({});
@@ -48,7 +49,7 @@ const Login = () => {
           const token = res?.data?.access_token ?? "";
           setToken(token);
           localStorage.setItem("token", token);
-          navigate("/dashboard/problem-solve");
+          navigate("/");
           window.scrollTo({
             top: 0,
             left: 0,
@@ -86,6 +87,12 @@ const Login = () => {
       dispatch(setLoading(false));
     }
   };
+
+  useEffect(() => {
+    if (issetToken()) {
+      return navigate("/");
+    }
+  }, []);
 
   return (
     <div className="flex gap-3 select-none lg:h-full h-svh bg-white">
@@ -146,13 +153,13 @@ const Login = () => {
               </div>
             </Label>
             <CustomCheckbox label={t("login.remember_me")} />
-            <button
+            <BaseButton
+              blue_color="blue_color"
+              className="w-full"
               type="submit"
-              className="bg-dodgerBlue w-full p-4 rounded-[100px] border-none duration-200 text-base
-             font-semibold text-white hover:shadow-blueShadow"
             >
               {t("login.login_title")}
-            </button>
+            </BaseButton>
           </form>
         </div>
       </div>

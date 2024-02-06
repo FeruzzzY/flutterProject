@@ -26,7 +26,9 @@ const ProblemsSubmit = ({
   const hightlightWithLineNumbers = (input, language) =>
     highlight(input, language)
       .split("\n")
-      .map((line, i) => `<span class='editorLineNumber'>${i + 1}</span>${line}`)
+      .map(
+        (line, i) => `<span className='editorLineNumber'>${i + 1}</span>${line}`
+      )
       .join("\n");
   // *compiler functions
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Outlet, Route, Routes, useNavigate } from "react-router-dom";
+import { Outlet, Route, Routes, redirect, useNavigate } from "react-router-dom";
 import { ProblemSolve, ProblemSolveList } from "./pages/dashboard/my-courses";
 import { PageNFound } from "./components";
 import { DashboardLayout, Layout } from "./layout";
@@ -16,10 +16,8 @@ const RouterPages = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("token") == null) {
-      navigate("/login");
-    } else if (window.location.pathname === "/login" && issetToken()) {
-      navigate("/dashboard/problem-solve");
+    if (issetToken()) {
+      return navigate("/");
     }
   }, []);
 
