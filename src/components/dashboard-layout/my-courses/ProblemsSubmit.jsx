@@ -14,8 +14,14 @@ import "prismjs/themes/prism.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { formatBytes } from "../../../helpers/another_functions";
+import { SpinnerIcon } from "../../../components/svg/SpinnerIcon";
 
-const ProblemsSubmit = ({ detail, statusMy, getResultStatusMyPagination }) => {
+const ProblemsSubmit = ({
+  detail,
+  statusMy,
+  getResultStatusMyPagination,
+  setTab,
+}) => {
   // *compiler functions
   const hightlightWithLineNumbers = (input, language) =>
     highlight(input, language)
@@ -29,6 +35,7 @@ const ProblemsSubmit = ({ detail, statusMy, getResultStatusMyPagination }) => {
   const [codeValue, setCodeValue] = useState(``);
   const [solutionError, setSolutionError] = useState(false);
   const [open, setOpen] = useState(false);
+  const [loadingLocal, setLoadingLocal] = useState(false);
 
   const toggleDropdown = () => setOpen(!open);
 
@@ -80,7 +87,7 @@ const ProblemsSubmit = ({ detail, statusMy, getResultStatusMyPagination }) => {
 
   const handleSolution = (e) => {
     e.preventDefault();
-    dispatch(setLoading(true));
+    setLoadingLocal(true);
     let t = true,
       error = false;
     if (!codeValue) {
@@ -111,17 +118,19 @@ const ProblemsSubmit = ({ detail, statusMy, getResultStatusMyPagination }) => {
             left: 0,
             behavior: "smooth",
           });
+          setSolutionError(false);
+          setTab(4);
           getResultStatusMyPagination();
         })
         .catch((error) => {
           console.log(error);
         })
         .finally(() => {
-          dispatch(setLoading(false));
+          setLoadingLocal(false);
         });
     } else {
       setSolutionError(error);
-      dispatch(setLoading(false));
+      setLoadingLocal(false);
       window.scrollTo({
         top: 0,
         left: 0,
@@ -131,8 +140,8 @@ const ProblemsSubmit = ({ detail, statusMy, getResultStatusMyPagination }) => {
   };
 
   return (
-    <div className="pb-16">
-      <TextSize20>
+    <div>
+      <TextSize20 className={solutionError ? `text-red` : ``}>
         {detail?.id}.{detail?.title}
       </TextSize20>
       <div className=" mt-2 pb-4 border-b border-b-gray">
@@ -149,13 +158,13 @@ const ProblemsSubmit = ({ detail, statusMy, getResultStatusMyPagination }) => {
           : {detail?.memory_limit ? formatBytes(detail?.memory_limit) : "-"}
         </p>{" "}
       </div>
-      <ProgrammingLanDropDown
+      {/* <ProgrammingLanDropDown
         open={open}
         toggleDropdown={toggleDropdown}
         compilers={compilers}
         activeCompiler={activeCompiler}
         chooseNewCompiler={chooseNewCompiler}
-      />
+      /> */}
       <br />
       <form onSubmit={(e) => handleSolution(e)}>
         <Editor
@@ -176,7 +185,7 @@ const ProblemsSubmit = ({ detail, statusMy, getResultStatusMyPagination }) => {
             type="submit"
             className="p-4 rounded-[100px] bg-blue w-[261px]"
           >
-            {t("problem_solve.submit")}
+            {loadingLocal ? <SpinnerIcon /> : t("problem_solve.submit")}
           </button>
         </div>
       </form>

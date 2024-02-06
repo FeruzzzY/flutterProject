@@ -30,6 +30,7 @@ module.exports = {
         blue: "#2A85FF",
         green: "#43D58F",
         greenLight: "#EEF8F2",
+        sliverWhite: "#fcfcfd",
       },
       zIndex: {
         9999: "9999",

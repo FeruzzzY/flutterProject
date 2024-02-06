@@ -156,23 +156,14 @@ const ProblemSolve = () => {
         {tab === 1 ? (
           <ProblemsTab detail={detail} />
         ) : tab === 2 ? (
-          <>
-            <ProblemsSubmit
-              detail={detail}
-              statusMy={statusMy}
-              getResultStatusMyPagination={() =>
-                getResultStatusMyPagination(obj?.p_size, obj?.page)
-              }
-            />
-            <MyStatusSolution
-              setObj={setObj}
-              obj={obj}
-              getResultStatusMyPagination={getResultStatusMyPagination}
-              statusMyPagination={statusMyPagination}
-              count={count}
-              optionsShowPageSize={optionsShowPageSize}
-            />
-          </>
+          <ProblemsSubmit
+            detail={detail}
+            statusMy={statusMy}
+            setTab={setTab}
+            getResultStatusMyPagination={() =>
+              getResultStatusMyPagination(obj?.p_size, obj?.page)
+            }
+          />
         ) : tab === 3 ? (
           <StatusSolution id={id} />
         ) : tab === 4 ? (
