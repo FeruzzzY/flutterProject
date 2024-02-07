@@ -31,6 +31,8 @@ module.exports = {
         green: "#43D58F",
         greenLight: "#EEF8F2",
         sliverWhite: "#fcfcfd",
+        stormDust: "#656567",
+        chicago: "#59595A",
       },
       zIndex: {
         9999: "9999",
