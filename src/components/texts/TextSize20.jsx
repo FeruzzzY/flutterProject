@@ -2,7 +2,9 @@ import React from "react";
 
 const TextSize20 = (props) => {
   return (
-    <div className={`text-xl font-bold text-black ${props.className}`}>
+    <div
+      className={`md:text-xl text-lg font-bold text-black ${props.className}`}
+    >
       {props?.children}
     </div>
   );

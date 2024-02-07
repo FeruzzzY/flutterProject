@@ -5,11 +5,15 @@ import { useTranslation } from "react-i18next";
 import BaseButtonOutline from "../buttons/BaseButtonOutline";
 import { CiMenuFries } from "react-icons/ci";
 import { issetToken } from "../../helpers/tokenStorage";
+import NavDropDown from "./NavDropDown";
 
 const Navbar = () => {
   const [scrolling, setScrolling] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const { t } = useTranslation();
+
+  const toggleDropdown = () => setOpen(!open);
 
   const handleScroll = () => {
     if (window.scrollY > 0) {
@@ -37,35 +41,35 @@ const Navbar = () => {
               <BrandIcon />
             </Link>
             <div className="gap-10 pt-1 lg:flex hidden">
-              <Link
-                to="/benefits"
+              <a
+                href="#benefits"
                 className="font-semibold text-base text-black duration-150 hover:text-dodgerBlue"
               >
                 {t("navbar.benefits")}
-              </Link>
-              <Link
-                to="/our-courses"
+              </a>
+              <a
+                href="#our-courses"
                 className="font-semibold text-base text-black duration-150 hover:text-dodgerBlue"
               >
                 {t("navbar.our_courses")}
-              </Link>
-              <Link
-                to="/our-testimonials"
+              </a>
+              <a
+                href="#our-testimonials"
                 className="font-semibold text-base text-black duration-150 hover:text-dodgerBlue"
               >
                 {t("navbar.our_testimonials")}
-              </Link>
-              <Link
-                to="/faq"
+              </a>
+              <a
+                href="#faq"
                 className="font-semibold text-base text-black duration-150 hover:text-dodgerBlue"
               >
                 {t("navbar.faq")}
-              </Link>
+              </a>
             </div>
           </div>
           <div className="flex gap-3 items-center">
             {issetToken() ? (
-              "userrr"
+              <NavDropDown open={open} toggleDropdown={toggleDropdown} />
             ) : (
               <Link to="/login">
                 <BaseButtonOutline type="button" blue_color="blue_color">

@@ -43,24 +43,24 @@ const Footer = () => {
             <div>
               <p className="text-xl font-bold text-black mb-4">Home</p>
               <div className="flex flex-col gap-2 text-xl font-normal text-chicago ">
-                <Link to="/benefits" className="hover:text-black duration-200">
+                <a href="#benefits" className="hover:text-black duration-200">
                   Benefits
-                </Link>
-                <Link
-                  to="/our-courses"
+                </a>
+                <a
+                  href="#our-courses"
                   className="hover:text-black duration-200"
                 >
                   Our Courses
-                </Link>
-                <Link
-                  to="/our-testimonials"
+                </a>
+                <a
+                  href="#our-testimonials"
                   className="hover:text-black duration-200"
                 >
                   Our Testimonials
-                </Link>
-                <Link to="/faq" className="hover:text-black duration-200">
+                </a>
+                <a href="#faq" className="hover:text-black duration-200">
                   Our FAQ
-                </Link>
+                </a>
               </div>
             </div>
           </div>

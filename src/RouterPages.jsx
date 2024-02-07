@@ -15,11 +15,11 @@ import { issetToken } from "./helpers/tokenStorage";
 const RouterPages = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (issetToken()) {
-      return navigate("/");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (issetToken()) {
+  //     navigate("/");
+  //   }
+  // }, []);
 
   return (
     <Routes>

@@ -28,11 +28,13 @@ module.exports = {
         red: "#CE5A67",
         grayLight: "#fcfcfd",
         blue: "#2A85FF",
+        blueLight: "#E8F7FA",
         green: "#43D58F",
         greenLight: "#EEF8F2",
         sliverWhite: "#fcfcfd",
         stormDust: "#656567",
         chicago: "#59595A",
+        orangeColor: "#FEF1D7",
       },
       zIndex: {
         9999: "9999",
