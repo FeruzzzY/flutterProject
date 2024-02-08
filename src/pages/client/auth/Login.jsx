@@ -9,15 +9,16 @@ import { useDispatch } from "react-redux";
 import { issetToken, setToken } from "../../../helpers/tokenStorage";
 import { useNavigate } from "react-router-dom";
 import { setLoading } from "../../../redux";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useTranslation } from "react-i18next";
 import BaseButton from "../../../components/buttons/BaseButton";
+import { SpinnerIcon } from "../../../components/svg/SpinnerIcon";
+import toastr from "toastr";
 
 const Login = () => {
   const [obj, setObj] = useState({});
   const [objE, setObjE] = useState({});
   const [showPassword, setShowPassword] = useState(true);
+  const [loadingLocal, setLoadingLocal] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -31,18 +32,18 @@ const Login = () => {
 
   const submitLogin = (e) => {
     e.preventDefault();
-    dispatch(setLoading(true));
-    let t = true,
+    setLoadingLocal(true);
+    let tt = true,
       err = {};
     if (!obj?.name) {
-      t = false;
+      tt = false;
       err = { ...err, name: true };
     }
     if (!obj?.password) {
-      t = false;
+      tt = false;
       err = { ...err, password: true };
     }
-    if (t) {
+    if (tt) {
       GetAuthInstance()
         .post("api/v1/login", obj)
         .then((res) => {
@@ -55,42 +56,27 @@ const Login = () => {
             left: 0,
             behavior: "smooth",
           });
-          toast.success(t("login.success_login"), {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toastr.success(t("login.success_login"));
         })
         .catch((error) => {
-          if (error.response.status === 401) {
-            toast.error(t("login.error_logging_in"), {
-              position: "top-right",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
+          if (error?.response?.status === 401) {
+            toastr.error(t("login.error_logging_in"));
           }
         })
         .finally(() => {
-          dispatch(setLoading(false));
+          setLoadingLocal(false);
         });
     } else {
-      console.log("err", err);
       setObjE(err);
-      dispatch(setLoading(false));
+      setLoadingLocal(false);
     }
   };
 
   useEffect(() => {
-    if (issetToken()) {
-      return navigate("/");
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    } else {
+      navigate("/login");
     }
   }, []);
 
@@ -99,7 +85,7 @@ const Login = () => {
       <div className="lg:w-[50%] w-full lg:mt-0 mt-6 lg:mb-0 mb-6 p-4 flex items-center justify-center">
         <div>
           <p className="text-2xl lg:text-4xl font-bold text-black text-center">
-            {t("login.success_login_title")}
+            {t("login.login_title")}
           </p>
           <p className="text-xl font-medium text-black text-center mt-3">
             {t("login.login_welcome")}
@@ -109,7 +95,7 @@ const Login = () => {
               <CustomInput
                 placeholder={t("login.enter_your_login")}
                 name="name"
-                value={obj?.name}
+                value={obj?.name || ""}
                 onChange={changeInput}
               />
 
@@ -125,7 +111,7 @@ const Login = () => {
                 className="pr-[40px]"
                 placeholder={t("login.enter_your_password")}
                 name="password"
-                value={obj?.password}
+                value={obj?.password || ""}
                 onChange={changeInput}
               />
               {objE.password ? (
@@ -158,7 +144,7 @@ const Login = () => {
               className="w-full"
               type="submit"
             >
-              {t("login.login_title")}
+              {loadingLocal ? <SpinnerIcon /> : t("login.login_title")}
             </BaseButton>
           </form>
         </div>

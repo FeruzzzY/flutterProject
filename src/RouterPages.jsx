@@ -23,6 +23,7 @@ const RouterPages = () => {
 
   return (
     <Routes>
+      <Route path="/login" element={<Login />} />
       <Route
         element={
           <Layout>
@@ -33,7 +34,6 @@ const RouterPages = () => {
         <Route path="/">
           <Route index element={<Home />} />
           <Route path="ui" element={<Ui />} />
-          <Route path="login" element={<Login />} />
         </Route>
       </Route>
       <Route path="/dashboard">

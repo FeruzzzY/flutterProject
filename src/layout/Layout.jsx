@@ -1,5 +1,4 @@
 import React from "react";
-import { ToastContainer } from "react-toastify";
 import Navbar from "../components/global/Navbar";
 import Footer from "../components/global/Footer";
 
@@ -9,7 +8,6 @@ const Layout = ({ children }) => {
       <Navbar />
       <div className="mt-[90px]">{children}</div>
       <Footer />
-      <ToastContainer />
     </div>
   );
 };

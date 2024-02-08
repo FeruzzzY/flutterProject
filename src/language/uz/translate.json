@@ -81,7 +81,11 @@
       "enter_your_password": "Enter your password",
       "enter_password": "Enter password",
       "forgot_password": "Forgot Password?",
-      "remember_me": "Remember Me"
+      "remember_me": "Remember Me",
+      "sure_log_out": "Are you sure you want to log out?",
+      "cancel": "Cancel",
+      "yes": "Yes",
+      "logged_out": "You are logged out."
     }
   }
 }

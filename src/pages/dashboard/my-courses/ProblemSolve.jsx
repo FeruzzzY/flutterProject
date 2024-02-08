@@ -163,6 +163,7 @@ const ProblemSolve = () => {
             getResultStatusMyPagination={() =>
               getResultStatusMyPagination(obj?.p_size, obj?.page)
             }
+            getProblems={() => getProblems()}
           />
         ) : tab === 3 ? (
           <StatusSolution id={id} />

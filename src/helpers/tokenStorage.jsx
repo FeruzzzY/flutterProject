@@ -1,4 +1,4 @@
-const TOKEN_KEY = 'token';
+const TOKEN_KEY = "token";
 
 export const getStorage = (local) => {
   return local ? localStorage : sessionStorage;

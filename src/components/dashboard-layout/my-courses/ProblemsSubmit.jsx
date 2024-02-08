@@ -11,24 +11,22 @@ import { highlight, languages } from "prismjs/components/prism-core";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 import "prismjs/themes/prism.css";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { formatBytes } from "../../../helpers/another_functions";
 import { SpinnerIcon } from "../../../components/svg/SpinnerIcon";
+import toastr from "toastr";
 
 const ProblemsSubmit = ({
   detail,
   statusMy,
   getResultStatusMyPagination,
   setTab,
+  getProblems,
 }) => {
   // *compiler functions
   const hightlightWithLineNumbers = (input, language) =>
     highlight(input, language)
       .split("\n")
-      .map(
-        (line, i) => `<span className='editorLineNumber'>${i + 1}</span>${line}`
-      )
+      .map((line, i) => `<span className='editorLineNumber'>${i + 1}</span>`)
       .join("\n");
   // *compiler functions
 
@@ -102,19 +100,12 @@ const ProblemsSubmit = ({
     formData.append("problem_id", detail?.id);
     formData.append("contest_slug", "contest-test-dart");
     formData.append("solution", `${codeValue}`);
+    setCodeValue(codeValue);
     if (t) {
       GetAuthInstance()
         .post(`api/v1/submit-solution`, formData)
         .then((res) => {
-          toast.success(res?.data?.msg, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toastr.success(res?.data?.msg);
           window.scrollTo({
             top: 0,
             left: 0,
@@ -123,6 +114,7 @@ const ProblemsSubmit = ({
           setSolutionError(false);
           setTab(4);
           getResultStatusMyPagination();
+          getProblems();
         })
         .catch((error) => {
           console.log(error);
@@ -168,20 +160,43 @@ const ProblemsSubmit = ({
         chooseNewCompiler={chooseNewCompiler}
       /> */}
       <br />
+
       <form onSubmit={(e) => handleSolution(e)}>
-        <Editor
-          value={codeValue}
-          onValueChange={(code) => setCodeValue(code)}
-          highlight={(code) => hightlightWithLineNumbers(code, languages.js)}
-          padding={10}
-          textareaId="codeArea"
-          className="editor border border-[#E8E9EB] rounded-[10px] min-h-[400px]"
-          style={{
-            fontFamily: '"Fira code", "Fira Mono", monospace',
-            fontSize: 16,
-            outline: 0,
-          }}
-        />
+        <div className="flex">
+          <div className="editor_n">
+            <Editor
+              value={codeValue}
+              onValueChange={(code) => setCodeValue(code)}
+              highlight={(code) =>
+                hightlightWithLineNumbers(code, languages.js)
+              }
+              padding={10}
+              textareaId="codeArea"
+              className="editor !border-none !p-0"
+              style={{
+                fontFamily: '"Fira code", "Fira Mono", monospace',
+                fontSize: 16,
+                outline: 0,
+              }}
+            />
+          </div>
+          <div className="w-full">
+            <Editor
+              value={codeValue}
+              onValueChange={(code) => setCodeValue(code)}
+              // highlight={(code) => hightlightWithLineNumbers(code, languages.js)}
+              highlight={(code) => highlight(code, languages.js)}
+              padding={10}
+              textareaId="codeArea"
+              className="editor border border-[#E8E9EB] rounded-[10px] min-h-[400px]"
+              style={{
+                fontFamily: '"Fira code", "Fira Mono", monospace',
+                fontSize: 16,
+                outline: 0,
+              }}
+            />
+          </div>
+        </div>
         <div className="flex justify-center w-full mt-3 text-white">
           <button
             type="submit"

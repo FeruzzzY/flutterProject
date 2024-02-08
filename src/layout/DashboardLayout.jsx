@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { SideBar, NavigationDashboard } from "../components/dashboard-layout";
 import Loading from "../components/Loading";
 import { useSelector } from "react-redux";
-import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { issetToken } from "../helpers/tokenStorage";
 
 const DashboardLayout = ({ children }) => {
   const { loading } = useSelector((state) => state);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      // Token exists
+      console.log("Token exists in localStorage");
+    } else {
+      navigate("/login");
+    }
+  }, []);
   return (
     <>
       {loading ? <Loading /> : ""}
@@ -18,8 +29,6 @@ const DashboardLayout = ({ children }) => {
           <div className="p-6">{children}</div>
         </div>
       </div>
-
-      <ToastContainer />
     </>
   );
 };

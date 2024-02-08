@@ -1,17 +1,34 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import AvatarIcon from "../icons/AvatarIcon";
 import GlobusIcon from "../icons/GlobusIcon";
 import LogOutIcon from "../icons/LogOutIcon";
 import { Link } from "react-router-dom";
 
-const NavDropDown = ({ open, toggleDropdown }) => {
+const NavDropDown = ({ open, setOpen, toggleDropdown, setLogOut }) => {
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    // Function to handle click outside the dropdown
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    // Attach the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Cleanup function to remove the event listener
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div
-      onClick={() => toggleDropdown()}
-      // onBlur={() => toggleDropdown()}
-      // onFocus={() => toggleDropdown()}
       tabIndex="0"
       className="relative inline-flex my-2 z-9999"
+      ref={dropdownRef}
     >
       <div
         className="flex items-center cursor-pointer rounded-full"
@@ -40,10 +57,16 @@ const NavDropDown = ({ open, toggleDropdown }) => {
                 Go to cabinet
               </p>
             </Link>
-            <div className="group flex gap-3 items-center py-4 px-6">
+            <div
+              className="group flex gap-3 items-center py-4 px-6 cursor-pointer"
+              onClick={() => {
+                setLogOut();
+                toggleDropdown();
+              }}
+            >
               <LogOutIcon />
               <p className="text-base font-bold text-black duration-200 group-hover:text-dodgerBlue">
-                Muzaffar Fozilov
+                Log out
               </p>
             </div>
           </div>

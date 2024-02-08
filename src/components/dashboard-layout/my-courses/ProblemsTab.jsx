@@ -4,9 +4,8 @@ import CustomInput from "../../../components/forms/CustomInput";
 import Label from "../../../components/forms/Label";
 import { CloneIcon } from "../../../components/icons";
 import TextSize20 from "../../texts/TextSize20";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useTranslation } from "react-i18next";
+import toastr from "toastr";
 
 const ProblemsTab = ({ detail }) => {
   const { t } = useTranslation();
@@ -14,15 +13,7 @@ const ProblemsTab = ({ detail }) => {
     navigator.clipboard
       .writeText(val)
       .then(() => {
-        toast.success(t("problem_solve.input_copied_clipboard"), {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toastr.success(t("problem_solve.input_copied_clipboard"));
       })
       .catch((error) => {});
   };
@@ -31,15 +22,7 @@ const ProblemsTab = ({ detail }) => {
     navigator.clipboard
       .writeText(val)
       .then(() => {
-        toast.success(t("problem_solve.output_copied_clipboard"), {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toastr.success(t("problem_solve.output_copied_clipboard"));
       })
       .catch((error) => {});
   };
