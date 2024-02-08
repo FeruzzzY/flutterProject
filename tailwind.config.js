@@ -44,6 +44,8 @@ module.exports = {
       boxShadow: {
         blueShadow:
           "0px 101px 40px rgba(0, 87, 255, 0.02), 0px 57px 34px rgba(0, 87, 255, 0.08), 0px 25px 25px rgba(0, 87, 255, 0.13), 0px 6px 14px rgba(0, 87, 255, 0.15)",
+        redShadow:
+          "0px 101px 40px rgba(206, 90, 103, 0.02), 0px 57px 34px rgba(206, 90, 103, 0.08), 0px 25px 25px rgba(206, 90, 103, 0.13), 0px 6px 14px rgba(206, 90, 103, 0.15)",
       },
     },
     fontFamily: {

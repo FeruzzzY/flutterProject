@@ -11,7 +11,7 @@ import {
 } from "../../icons";
 import { useTranslation } from "react-i18next";
 
-const UlLinks = ({ link, text }) => {
+const UlLinks = ({ link, text, setLogOut, close }) => {
   const { t } = useTranslation();
   const list = [
     {
@@ -49,6 +49,7 @@ const UlLinks = ({ link, text }) => {
           <NavLink
             end
             to={"/dashboard"}
+            onClick={close}
             className={({ isActive }) =>
               isActive
                 ? "flex items-center w-full p-4 rounded-xl gap-3 text-xl !text-dark font-semibold bg-gray duration-150s"
@@ -64,6 +65,7 @@ const UlLinks = ({ link, text }) => {
             <li key={index} className="w-full my-1">
               <NavLink
                 to={link}
+                onClick={close}
                 className={({ isActive }) =>
                   isActive
                     ? "flex items-center w-full p-4 rounded-xl gap-3 text-xl !text-dark font-semibold bg-gray duration-150s"
@@ -84,6 +86,7 @@ const UlLinks = ({ link, text }) => {
               <NavLink
                 end
                 to={link}
+                onClick={close}
                 className={({ isActive }) =>
                   isActive
                     ? "flex items-center w-full p-4 rounded-xl gap-3 text-xl !text-dark font-semibold bg-gray duration-150"
@@ -96,7 +99,10 @@ const UlLinks = ({ link, text }) => {
           );
         })}
         <li className="w-full my-0.5">
-          <div className="flex items-center w-full p-4 rounded-xl gap-3 text-xl font-semibold text-grayDark cursor-pointer hover:bg-gray hover:text-dark duration-150">
+          <div
+            onClick={setLogOut}
+            className="flex items-center w-full p-4 rounded-xl gap-3 text-xl font-semibold text-grayDark cursor-pointer hover:bg-gray hover:text-dark duration-150"
+          >
             <LogOutIcon />{" "}
             <span className="">{t("sidebar_links.log_out")}</span>
           </div>

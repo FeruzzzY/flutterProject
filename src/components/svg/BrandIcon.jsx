@@ -1,8 +1,9 @@
 import React from "react";
 
-export const BrandIcon = () => {
+export const BrandIcon = (props) => {
   return (
     <svg
+      {...props}
       width="108"
       height="34"
       viewBox="0 0 108 34"

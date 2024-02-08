@@ -7,14 +7,16 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import toastr from "toastr";
 
-const LogOutModal = ({ setLogOut }) => {
+const LogOutModal = ({ setLogOut, cabinetTrue }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleLogOut = () => {
     removeToken();
     setLogOut();
-    navigate("/login");
+    if (cabinetTrue) {
+      navigate("/");
+    }
     toastr.success(t("login.logged_out"));
   };
   return (
@@ -23,10 +25,10 @@ const LogOutModal = ({ setLogOut }) => {
       <div className="flex justify-center items-center relative z-[9002] w-full h-full">
         <div
           className="bg-white p-8 rounded-2xl relative z-[9003]
-        sm:w-[340px] w-full"
+        sm:w-[340px] w-[calc(100%_-_30px)]"
         >
-          <div className="absolute top-[20px] left-[25px] w-full h-full">
-            <div className="flex ">
+          <div className="absolute top-[20px] left-[-55px] w-full h-full">
+            <div className="flex justify-center ">
               <img src="/images/logout_redbg.png" alt="" />
             </div>
           </div>
@@ -38,6 +40,7 @@ const LogOutModal = ({ setLogOut }) => {
               <BaseButtonOutline
                 blue_color="blue_color"
                 className="!py-2.5"
+                onClick={() => setLogOut()}
                 type="button"
               >
                 {t("login.cancel")}

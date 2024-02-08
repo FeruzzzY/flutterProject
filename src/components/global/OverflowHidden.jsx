@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-const OverflowHiddenComponent = ({ children }) => {
+const OverflowHidden = ({ children }) => {
   useEffect(() => {
     // Set overflow to hidden when the component mounts
     document.body.style.overflow = "hidden";
@@ -14,4 +14,4 @@ const OverflowHiddenComponent = ({ children }) => {
   return <>{children}</>;
 };
 
-export default OverflowHiddenComponent;
+export default OverflowHidden;

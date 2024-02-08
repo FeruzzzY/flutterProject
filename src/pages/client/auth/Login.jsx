@@ -7,12 +7,13 @@ import { IoEyeOffOutline } from "react-icons/io5";
 import { GetAuthInstance } from "../../../helpers/httpClient";
 import { useDispatch } from "react-redux";
 import { issetToken, setToken } from "../../../helpers/tokenStorage";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setLoading } from "../../../redux";
 import { useTranslation } from "react-i18next";
 import BaseButton from "../../../components/buttons/BaseButton";
 import { SpinnerIcon } from "../../../components/svg/SpinnerIcon";
 import toastr from "toastr";
+import { BrandIcon } from "../../../components/svg/BrandIcon";
 
 const Login = () => {
   const [obj, setObj] = useState({});
@@ -84,9 +85,11 @@ const Login = () => {
     <div className="flex gap-3 select-none lg:h-full h-svh bg-white">
       <div className="lg:w-[50%] w-full lg:mt-0 mt-6 lg:mb-0 mb-6 p-4 flex items-center justify-center">
         <div>
-          <p className="text-2xl lg:text-4xl font-bold text-black text-center">
-            {t("login.login_title")}
-          </p>
+          <div className="flex justify-center">
+            <Link to="/" className="inline-block">
+              <BrandIcon className="w-[150px] h-[70px]" />
+            </Link>
+          </div>
           <p className="text-xl font-medium text-black text-center mt-3">
             {t("login.login_welcome")}
           </p>

@@ -25,8 +25,7 @@ const DashboardLayout = ({ children }) => {
           <SideBar />
         </div>
         <div className="lg:ml-[300px] lg:w-[calc(100%_-_300px)] w-full">
-          <NavigationDashboard />
-          <div className="p-6">{children}</div>
+          {children}
         </div>
       </div>
     </>

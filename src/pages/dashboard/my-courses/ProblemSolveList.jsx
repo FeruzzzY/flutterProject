@@ -1,5 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
-import { TitleCabinet } from "../../../components/global";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { setLoading } from "../../../redux";
@@ -11,6 +10,7 @@ import { Link } from "react-router-dom";
 import Th from "../../../components/table/Th";
 import Td from "../../../components/table/Td";
 import CustomPagination from "../../../components/global/CustomPagination";
+import { NavigationDashboard } from "../../../components/dashboard-layout";
 
 const ProblemSolveList = () => {
   const { t, i18n } = useTranslation();
@@ -153,30 +153,34 @@ const ProblemSolveList = () => {
 
   return (
     <>
-      <div className="px-4 py-2 border border-gray inline-flex rounded-[100px] text-sm font-semibold text-grayDark mb-3">
-        Lesson 01
-      </div>
-      <TitleCabinet title="Matter for this lesson" />
+      <NavigationDashboard title={t("sidebar_links.my_courses")} />
+      <div className="lg:mt-[90px] mt-[60px] p-6">
+        <div className="px-4 py-2 border border-gray inline-flex rounded-[100px] text-sm font-semibold text-grayDark mb-3">
+          Lesson 01
+        </div>
+        <p className={`font-bold md:text-2xl text-lg mb-4`}>
+          Matter for this lesson
+        </p>
 
-      <CardRounded16>
-        <TextSize20>{t("tab_courses.problems")}</TextSize20>
-        <Table
-          th={
-            <tr className="text-left">
-              <Th className="!min-w-[40px]">№</Th>
-              <Th>{t("my_status_solution.title")}</Th>
-              <Th>{t("my_status_solution.status")}</Th>
-              <Th></Th>
-            </tr>
-          }
-          td={list?.map((item, index) => {
-            return (
-              <tr className="text-left" key={index}>
-                <Td className="!min-w-[40px]">{item?.id}</Td>
-                <Td>{item?.title}</Td>
-                <Td>
-                  <span
-                    className={`py-1 px-2 rounded-lg
+        <CardRounded16>
+          <TextSize20>{t("tab_courses.problems")}</TextSize20>
+          <Table
+            th={
+              <tr className="text-left">
+                <Th className="!min-w-[40px]">№</Th>
+                <Th>{t("my_status_solution.title")}</Th>
+                <Th>{t("my_status_solution.status")}</Th>
+                <Th></Th>
+              </tr>
+            }
+            td={list?.map((item, index) => {
+              return (
+                <tr className="text-left" key={index}>
+                  <Td className="!min-w-[40px]">{item?.id}</Td>
+                  <Td>{item?.title}</Td>
+                  <Td>
+                    <span
+                      className={`py-1 px-2 rounded-lg
                  ${
                    item?.status === -2 ||
                    item?.status === -1 ||
@@ -190,65 +194,66 @@ const ProblemSolveList = () => {
                      ? "text-green bg-greenLight"
                      : "text-grayDark bg-gray"
                  }`}
-                  >
-                    {item?.status === -2
-                      ? t("status_problem.compile_error")
-                      : item?.status === -1
-                      ? t("status_problem.wrong_answer")
-                      : item?.status === 0
-                      ? t("status_problem.accepted")
-                      : item?.status === 1
-                      ? t("status_problem.time_limit_exceed")
-                      : item?.status === 2
-                      ? t("status_problem.real_time_limit_exceed")
-                      : item?.status === 3
-                      ? t("status_problem.memory_limit_exceed")
-                      : item?.status === 4
-                      ? t("status_problem.runtime_error")
-                      : item?.status === 5
-                      ? t("status_problem.system_error")
-                      : item?.status === 6
-                      ? t("status_problem.pending")
-                      : item?.status === 7
-                      ? t("status_problem.judging")
-                      : item?.status === 8
-                      ? t("status_problem.partially_accepted")
-                      : item?.status === 9
-                      ? t("status_problem.compiler_problem_not_found")
-                      : item?.status === 10
-                      ? t("status_problem.checking")
-                      : null}
-                  </span>
-                </Td>
-                <Td className="min-w-[150px]">
-                  <div className="flex w-full justify-end">
-                    <Link
-                      to={`/dashboard/problem-solve/${item?.id}`}
-                      className="text-dodgerBlue border border-dodgerBlue px-6 py-3 rounded-[120px] duration-150 
-                    hover:text-white hover:bg-dodgerBlue"
                     >
-                      {t("my_status_solution.solve_now")}
-                    </Link>
-                  </div>
-                </Td>
-              </tr>
-            );
-          })}
-        />
+                      {item?.status === -2
+                        ? t("status_problem.compile_error")
+                        : item?.status === -1
+                        ? t("status_problem.wrong_answer")
+                        : item?.status === 0
+                        ? t("status_problem.accepted")
+                        : item?.status === 1
+                        ? t("status_problem.time_limit_exceed")
+                        : item?.status === 2
+                        ? t("status_problem.real_time_limit_exceed")
+                        : item?.status === 3
+                        ? t("status_problem.memory_limit_exceed")
+                        : item?.status === 4
+                        ? t("status_problem.runtime_error")
+                        : item?.status === 5
+                        ? t("status_problem.system_error")
+                        : item?.status === 6
+                        ? t("status_problem.pending")
+                        : item?.status === 7
+                        ? t("status_problem.judging")
+                        : item?.status === 8
+                        ? t("status_problem.partially_accepted")
+                        : item?.status === 9
+                        ? t("status_problem.compiler_problem_not_found")
+                        : item?.status === 10
+                        ? t("status_problem.checking")
+                        : null}
+                    </span>
+                  </Td>
+                  <Td className="min-w-[150px]">
+                    <div className="flex w-full justify-end">
+                      <Link
+                        to={`/dashboard/problem-solve/${item?.id}`}
+                        className="text-dodgerBlue border border-dodgerBlue px-6 py-3 rounded-[120px] duration-150 
+                    hover:text-white hover:bg-dodgerBlue"
+                      >
+                        {t("my_status_solution.solve_now")}
+                      </Link>
+                    </div>
+                  </Td>
+                </tr>
+              );
+            })}
+          />
 
-        <CustomPagination
-          toFirstPage={toFirstPage}
-          singlePrevPage={singlePrevPage}
-          singleNextPage={singleNextPage}
-          toLastPage={toLastPage}
-          obj={obj}
-          count={count}
-          listData={list}
-          handleShowPageSize={handleShowPageSize}
-          optionsShowPageSize={optionsShowPageSize}
-          handleGoToPage={handleGoToPage}
-        />
-      </CardRounded16>
+          <CustomPagination
+            toFirstPage={toFirstPage}
+            singlePrevPage={singlePrevPage}
+            singleNextPage={singleNextPage}
+            toLastPage={toLastPage}
+            obj={obj}
+            count={count}
+            listData={list}
+            handleShowPageSize={handleShowPageSize}
+            optionsShowPageSize={optionsShowPageSize}
+            handleGoToPage={handleGoToPage}
+          />
+        </CardRounded16>
+      </div>
     </>
   );
 };

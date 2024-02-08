@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TitleCabinet, Tab } from "../../../components/global";
+import { Tab } from "../../../components/global";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { setLoading } from "../../../redux";
@@ -10,10 +10,9 @@ import CardRounded16 from "../../../components/cards/CardRounded16";
 import { useParams } from "react-router-dom";
 import Back from "../../../components/Back";
 import ProblemsSubmit from "../../../components/dashboard-layout/my-courses/ProblemsSubmit";
-import TextSize20 from "../../../components/texts/TextSize20";
-import { formatBytes } from "../../../helpers/another_functions";
 import StatusSolution from "../../../components/dashboard-layout/my-courses/StatusSolution";
 import MyStatusSolution from "../../../components/dashboard-layout/my-courses/MyStatusSolution";
+import { NavigationDashboard } from "../../../components/dashboard-layout";
 
 const ProblemSolve = () => {
   const { t, i18n } = useTranslation();
@@ -145,41 +144,45 @@ const ProblemSolve = () => {
 
   return (
     <div className="">
-      <Back link="/dashboard/problem-solve" />
-      <div className="px-4 py-2 border border-gray inline-flex rounded-[100px] text-sm font-semibold text-grayDark mb-3">
-        Lesson 01
-      </div>
-      <TitleCabinet title="Matter for this lesson" />
-      <Tab tabList={tabList} handleTab={handleTab} tab={tab} />
+      <NavigationDashboard title={t("sidebar_links.my_courses")} />
+      <div className="lg:mt-[90px] mt-[60px] p-6">
+        <Back link="/dashboard/problem-solve" />
+        <div className="px-4 py-2 border border-gray inline-flex rounded-[100px] text-sm font-semibold text-grayDark mb-3">
+          Lesson 01
+        </div>
+        <p className={`font-bold md:text-2xl text-lg mb-4`}>
+          Matter for this lesson
+        </p>
+        <Tab tabList={tabList} handleTab={handleTab} tab={tab} />
 
-      <CardRounded16>
-        {tab === 1 ? (
-          <ProblemsTab detail={detail} />
-        ) : tab === 2 ? (
-          <ProblemsSubmit
-            detail={detail}
-            statusMy={statusMy}
-            setTab={setTab}
-            getResultStatusMyPagination={() =>
-              getResultStatusMyPagination(obj?.p_size, obj?.page)
-            }
-            getProblems={() => getProblems()}
-          />
-        ) : tab === 3 ? (
-          <StatusSolution id={id} />
-        ) : tab === 4 ? (
-          <MyStatusSolution
-            setObj={setObj}
-            obj={obj}
-            getResultStatusMyPagination={getResultStatusMyPagination}
-            statusMyPagination={statusMyPagination}
-            count={count}
-            optionsShowPageSize={optionsShowPageSize}
-          />
-        ) : null}
-      </CardRounded16>
+        <CardRounded16>
+          {tab === 1 ? (
+            <ProblemsTab detail={detail} />
+          ) : tab === 2 ? (
+            <ProblemsSubmit
+              detail={detail}
+              statusMy={statusMy}
+              setTab={setTab}
+              getResultStatusMyPagination={() =>
+                getResultStatusMyPagination(obj?.p_size, obj?.page)
+              }
+              getProblems={() => getProblems()}
+            />
+          ) : tab === 3 ? (
+            <StatusSolution id={id} />
+          ) : tab === 4 ? (
+            <MyStatusSolution
+              setObj={setObj}
+              obj={obj}
+              getResultStatusMyPagination={getResultStatusMyPagination}
+              statusMyPagination={statusMyPagination}
+              count={count}
+              optionsShowPageSize={optionsShowPageSize}
+            />
+          ) : null}
+        </CardRounded16>
 
-      {/* <CouldNotSolve
+        {/* <CouldNotSolve
         info={{
           title: "Couldn't solve the problem?",
           sub_title: `If you failed to solve this clue in 1st attempt, you will be
@@ -189,6 +192,7 @@ const ProblemSolve = () => {
           In addition, you will be provided with an additional video tutorial on how to solve this problem.`,
         }}
       /> */}
+      </div>
     </div>
   );
 };

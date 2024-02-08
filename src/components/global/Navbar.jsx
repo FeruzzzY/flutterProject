@@ -3,16 +3,18 @@ import { BrandIcon } from "../svg/BrandIcon";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import BaseButtonOutline from "../buttons/BaseButtonOutline";
-import { CiMenuFries } from "react-icons/ci";
-import { issetToken } from "../../helpers/tokenStorage";
+import { RiMenu3Fill } from "react-icons/ri";
+import { RiMenu2Fill } from "react-icons/ri";
 import NavDropDown from "./NavDropDown";
 import OverflowHidden from "../../components/global/OverflowHidden";
 import LogOutModal from "../../components/modals/LogOutModal";
+import MobileMenu from "../modals/MobileMenu";
 
 const Navbar = () => {
   const [scrolling, setScrolling] = useState(false);
   const [open, setOpen] = useState(false);
   const [logOut, setLogOut] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const { t } = useTranslation();
 
@@ -87,8 +89,22 @@ const Navbar = () => {
                 </Link>
               )}
 
-              <div className="lg:hidden flex ">
-                <CiMenuFries size="20" color="#2A85FF" />
+              <div className="lg:hidden flex">
+                {mobileOpen ? (
+                  <RiMenu2Fill
+                    onClick={() => setMobileOpen(false)}
+                    size="28"
+                    className="cursor-pointer"
+                    color="#2A85FF"
+                  />
+                ) : (
+                  <RiMenu3Fill
+                    onClick={() => setMobileOpen(true)}
+                    size="28"
+                    className="cursor-pointer"
+                    color="#2A85FF"
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -100,6 +116,7 @@ const Navbar = () => {
           <LogOutModal setLogOut={() => setLogOut(false)} />
         </OverflowHidden>
       ) : null}
+      {mobileOpen ? <MobileMenu close={() => setMobileOpen(false)} /> : null}
     </>
   );
 };

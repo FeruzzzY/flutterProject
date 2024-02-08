@@ -5,10 +5,12 @@ import OurCourses from "../../components/client/home/OurCourses";
 import ExpertSection from "../../components/client/home/ExpertSection";
 import EducationalProcces from "../../components/client/home/EducationalProcces";
 import OurCoursesApply from "../../components/client/home/OurCoursesApply";
+import UnlockPotential from "../../components/client/home/UnlockPotential";
 
 const Home = () => {
   return (
     <div>
+      <UnlockPotential />
       <EducationalProcces />
       <OurCoursesApply />
       <ExpertSection />

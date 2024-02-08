@@ -1,9 +1,17 @@
-import React, { useEffect } from "react";
-import { issetToken } from "../../helpers/tokenStorage";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { NavigationDashboard } from "../../components/dashboard-layout";
+import { useTranslation } from "react-i18next";
 
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  const { t } = useTranslation();
+  return (
+    <div>
+      <NavigationDashboard title={t("sidebar_links.home")} />
+      <div className="lg:mt-[90px] mt-[60px] p-6">
+        {t("sidebar_links.home")}
+      </div>
+    </div>
+  );
 };
 
 export default Dashboard;
