@@ -163,7 +163,7 @@ const ProblemsSubmit = ({
 
       <form onSubmit={(e) => handleSolution(e)}>
         <div className="flex">
-          <div className="editor_n">
+          <div className="editor_n select-none relative">
             <Editor
               value={codeValue}
               onValueChange={(code) => setCodeValue(code)}
@@ -179,6 +179,7 @@ const ProblemsSubmit = ({
                 outline: 0,
               }}
             />
+            <div className="absolute top-0 left-0 w-full h-full bg-transparent" />
           </div>
           <div className="w-full">
             <Editor

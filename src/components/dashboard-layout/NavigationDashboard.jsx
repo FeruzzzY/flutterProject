@@ -34,7 +34,7 @@ const NavigationDashboard = ({ title }) => {
       <div
         className="fixed top-0 left-0 lg:left-[300px] lg:w-[calc(100%_-_300px)] 
       w-full lg:py-3 py-0 lg:px-6 px-3 bg-white flex items-center justify-between border-b 
-      border-b-[#E8E9EB]"
+      border-b-[#E8E9EB] z-[8000]"
       >
         <TitleCabinet title={title} className="!mb-0" />
         <div className="flex gap-3 items-center">
