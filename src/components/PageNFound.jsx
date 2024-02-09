@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const PageNFound = () => {
   return (
-    <div className="lg:mt-[90px] mt-[60px] p-6">
+    <div className="lg:mt-[70px] mt-[60px] p-6">
       <div className="flex w-full justify-center">
         <div className="md:w-[681px] flex w-full gap-6 flex-col items-center">
           <img src="/images/404.png" className="w-[200px] h-[200px]" alt="" />
