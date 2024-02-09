@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Outlet, Route, Routes, redirect, useNavigate } from "react-router-dom";
 import { ProblemSolve, ProblemSolveList } from "./pages/dashboard/my-courses";
-import { PageNFound } from "./components";
+import { PageNFound, PageNFoundDashboard } from "./components";
 import { DashboardLayout, Layout } from "./layout";
 import { Home, Ui } from "./pages/client";
 import Dashboard from "./pages/dashboard/Dashboard";
@@ -11,6 +11,7 @@ import { Settings } from "./pages/dashboard/settings";
 import { Help } from "./pages/dashboard/help";
 import Login from "./pages/client/auth/Login";
 import { issetToken } from "./helpers/tokenStorage";
+import Notifications from "./pages/dashboard/notifications/Notifications";
 
 const RouterPages = () => {
   const navigate = useNavigate();
@@ -65,7 +66,11 @@ const RouterPages = () => {
           <Route path="help">
             <Route index element={<Help />} />
           </Route>
+          <Route path="notifications">
+            <Route index element={<Notifications />} />
+          </Route>
 
+          <Route path="*" element={<PageNFoundDashboard />} />
           {/* <Route path="conversation-type">
               <Route index element={<ConversationType />} />
               <Route path=":id">

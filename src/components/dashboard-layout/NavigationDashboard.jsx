@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TitleCabinet from "../global/TitleCabinet";
 import NavDropDown from "../global/NavDropDown";
+import NavDropNotification from "../global/NavDropNotification";
 import OverflowHidden from "../global/OverflowHidden";
 import LogOutModal from "../modals/LogOutModal";
 import { RiMenu3Fill } from "react-icons/ri";
@@ -10,10 +11,12 @@ import SideBar from "./SideBar";
 const NavigationDashboard = ({ title }) => {
   const [scrolling, setScrolling] = useState(false);
   const [open, setOpen] = useState(false);
+  const [openNotif, setOpenNotif] = useState(false);
   const [logOut, setLogOut] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const toggleDropdown = () => setOpen(!open);
+  const toggleDropdownNotif = () => setOpenNotif(!openNotif);
 
   const handleScroll = () => {
     if (window.scrollY > 0) {
@@ -34,10 +37,15 @@ const NavigationDashboard = ({ title }) => {
       <div
         className="fixed top-0 left-0 lg:left-[300px] lg:w-[calc(100%_-_300px)] 
       w-full lg:py-3 py-0 lg:px-6 px-3 bg-white flex items-center justify-between border-b 
-      border-b-[#E8E9EB] z-[8000]"
+      border-b-[#E8E9EB] z-[40]"
       >
         <TitleCabinet title={title} className="!mb-0" />
-        <div className="flex gap-3 items-center">
+        <div className="flex gap-4 items-center relative">
+          <NavDropNotification
+            open={openNotif}
+            setOpen={setOpenNotif}
+            toggleDropdown={toggleDropdownNotif}
+          />
           <NavDropDown
             open={open}
             setOpen={setOpen}

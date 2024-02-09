@@ -10,7 +10,8 @@
       "help": "Help",
       "log_out": "Log out",
       "go_to_website": "Go to website",
-      "go_to_cabinet": "Go to cabinet"
+      "go_to_cabinet": "Go to cabinet",
+      "notifications": "Notifications"
     },
     "navbar": {
       "benefits": "Benefits",
