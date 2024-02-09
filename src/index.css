@@ -302,3 +302,7 @@ pre[class*="language-"] {
 }
 
 /* prism css */
+
+.monaco-editor {
+  border: none !important;
+}

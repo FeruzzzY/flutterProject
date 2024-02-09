@@ -15,6 +15,10 @@ import { formatBytes } from "../../../helpers/another_functions";
 import { SpinnerIcon } from "../../../components/svg/SpinnerIcon";
 import toastr from "toastr";
 import MonacoEditor from "react-monaco-editor";
+import { SimpleCodeEditor } from "react-simple-code-editor";
+
+import CodeMirror from "@uiw/react-codemirror";
+import { javascript } from "@codemirror/lang-javascript";
 
 const ProblemsSubmit = ({
   detail,
@@ -37,6 +41,14 @@ const ProblemsSubmit = ({
   const [solutionError, setSolutionError] = useState(false);
   const [open, setOpen] = useState(false);
   const [loadingLocal, setLoadingLocal] = useState(false);
+
+  const [code, setCode] = useState("");
+
+  // Function to count the number of lines in the code
+  const countLines = () => code.split("\n").length;
+
+  // Generate an array of line numbers
+  const lineNumbers = Array.from(Array(countLines()), (_, index) => index + 1);
 
   const toggleDropdown = () => setOpen(!open);
 
@@ -137,11 +149,12 @@ const ProblemsSubmit = ({
   const options = {
     readOnly: false,
     lineNumbers: "on",
-    wordWrap: "on",
+    wordWrap: "off",
     fontSize: 14,
+    formatOnType: true,
     theme: "vs",
-    automaticLayout: true,
-    minimap: "enabled",
+    automaticLayout: false,
+    minimap: "renderCharacters",
   };
 
   return (
@@ -163,6 +176,7 @@ const ProblemsSubmit = ({
           : {detail?.memory_limit ? formatBytes(detail?.memory_limit) : "-"}
         </p>{" "}
       </div>
+
       {/* <ProgrammingLanDropDown
         open={open}
         toggleDropdown={toggleDropdown}
@@ -173,8 +187,8 @@ const ProblemsSubmit = ({
       <br />
 
       <form onSubmit={(e) => handleSolution(e)}>
-        <div className="flex">
-          {/* <div className="editor_n select-none relative">
+        {/* <div className="flex">
+          <div className="editor_n select-none relative">
             <Editor
               value={codeValue}
               onValueChange={(code) => setCodeValue(code)}
@@ -191,13 +205,14 @@ const ProblemsSubmit = ({
               }}
             />
             <div className="absolute top-0 left-0 w-full h-full bg-transparent" />
-          </div> */}
+          </div>
           <div className="w-full">
-            {/* <Editor
+            <Editor
               value={codeValue}
               onValueChange={(code) => setCodeValue(code)}
               highlight={(code) => highlight(code, languages.js)}
               padding={10}
+              lineNumbers="on"
               textareaId="codeArea"
               className="editor border border-[#E8E9EB] rounded-[10px] min-h-[400px]"
               style={{
@@ -205,18 +220,27 @@ const ProblemsSubmit = ({
                 fontSize: 16,
                 outline: 0,
               }}
-            /> */}
+            />
           </div>
-        </div>
+        </div> */}
 
-        <MonacoEditor
+        {/* <MonacoEditor
+          className="border border-[#E8E9EB] rounded-[10px] min-h-[400px] overflow-hidden py-3"
           width="100%"
           height="400px"
-          language="python"
+          language="javascript"
           theme="vs"
           value={codeValue}
           onChange={(code) => setCodeValue(code)}
           options={options}
+        /> */}
+
+        <CodeMirror
+          className="border border-[#E8E9EB] rounded-[10px] min-h-[400px] overflow-hidden"
+          value={codeValue}
+          height="400px"
+          extensions={[javascript({ jsx: true })]}
+          onChange={(code) => setCodeValue(code)}
         />
         <div className="flex justify-center w-full mt-3 text-white">
           <button
