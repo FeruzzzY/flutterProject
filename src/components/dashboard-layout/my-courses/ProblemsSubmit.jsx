@@ -14,6 +14,7 @@ import "prismjs/themes/prism.css";
 import { formatBytes } from "../../../helpers/another_functions";
 import { SpinnerIcon } from "../../../components/svg/SpinnerIcon";
 import toastr from "toastr";
+import MonacoEditor from "react-monaco-editor";
 
 const ProblemsSubmit = ({
   detail,
@@ -133,6 +134,16 @@ const ProblemsSubmit = ({
     }
   };
 
+  const options = {
+    readOnly: false,
+    lineNumbers: "on",
+    wordWrap: "on",
+    fontSize: 14,
+    theme: "vs",
+    automaticLayout: true,
+    minimap: "enabled",
+  };
+
   return (
     <div>
       <TextSize20 className={solutionError ? `text-red` : ``}>
@@ -163,7 +174,7 @@ const ProblemsSubmit = ({
 
       <form onSubmit={(e) => handleSolution(e)}>
         <div className="flex">
-          <div className="editor_n select-none relative">
+          {/* <div className="editor_n select-none relative">
             <Editor
               value={codeValue}
               onValueChange={(code) => setCodeValue(code)}
@@ -180,12 +191,11 @@ const ProblemsSubmit = ({
               }}
             />
             <div className="absolute top-0 left-0 w-full h-full bg-transparent" />
-          </div>
+          </div> */}
           <div className="w-full">
-            <Editor
+            {/* <Editor
               value={codeValue}
               onValueChange={(code) => setCodeValue(code)}
-              // highlight={(code) => hightlightWithLineNumbers(code, languages.js)}
               highlight={(code) => highlight(code, languages.js)}
               padding={10}
               textareaId="codeArea"
@@ -195,9 +205,19 @@ const ProblemsSubmit = ({
                 fontSize: 16,
                 outline: 0,
               }}
-            />
+            /> */}
           </div>
         </div>
+
+        <MonacoEditor
+          width="100%"
+          height="400px"
+          language="python"
+          theme="vs"
+          value={codeValue}
+          onChange={(code) => setCodeValue(code)}
+          options={options}
+        />
         <div className="flex justify-center w-full mt-3 text-white">
           <button
             type="submit"
