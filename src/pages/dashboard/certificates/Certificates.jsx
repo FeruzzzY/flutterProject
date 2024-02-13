@@ -12,7 +12,7 @@ const Certificates = () => {
   return (
     <div>
       <NavigationDashboard title={t("sidebar_links.certificates")} />
-      <div className="lg:mt-[70px] mt-[60px] p-6">
+      <div className="lg:mt-[90px] mt-[60px] p-6">
         <CardRounded16>
           <TextSize20>My certificates</TextSize20>
 

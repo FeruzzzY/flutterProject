@@ -306,3 +306,7 @@ pre[class*="language-"] {
 .monaco-editor {
   border: none !important;
 }
+
+/* .baseButtonOutline:hover > svg path {
+  stroke: #fff;
+} */

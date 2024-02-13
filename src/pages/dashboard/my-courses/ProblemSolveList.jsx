@@ -154,7 +154,7 @@ const ProblemSolveList = () => {
   return (
     <>
       <NavigationDashboard title={t("sidebar_links.my_courses")} />
-      <div className="lg:mt-[70px] mt-[60px] p-6">
+      <div className="lg:mt-[90px] mt-[60px] p-6">
         <div className="px-4 py-2 border border-gray inline-flex rounded-[100px] text-sm font-semibold text-grayDark mb-3">
           Lesson 01
         </div>
