@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Outlet, Route, Routes, redirect, useNavigate } from "react-router-dom";
+import React from "react";
+import { Outlet, Route, Routes } from "react-router-dom";
 import { ProblemSolve, ProblemSolveList } from "./pages/dashboard/my-courses";
 import { PageNFound, PageNFoundDashboard } from "./components";
 import { DashboardLayout, Layout } from "./layout";
@@ -10,18 +10,10 @@ import { Payments } from "./pages/dashboard/payments";
 import { Settings } from "./pages/dashboard/settings";
 import { Help } from "./pages/dashboard/help";
 import Login from "./pages/client/auth/Login";
-import { issetToken } from "./helpers/tokenStorage";
 import Notifications from "./pages/dashboard/notifications/Notifications";
+import Courses from "./pages/dashboard/courses/Courses";
 
 const RouterPages = () => {
-  const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (issetToken()) {
-  //     navigate("/");
-  //   }
-  // }, []);
-
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
@@ -46,7 +38,7 @@ const RouterPages = () => {
           }
         >
           <Route index element={<Dashboard />} />
-          <Route path="problem-solve" element={<ProblemSolve />} />
+          <Route path="courses" element={<Courses />} />
           <Route path="problem-solve">
             <Route index element={<ProblemSolveList />} />
             <Route path=":id">

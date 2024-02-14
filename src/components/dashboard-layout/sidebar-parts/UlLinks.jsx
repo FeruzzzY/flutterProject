@@ -34,6 +34,11 @@ const UlLinks = ({ link, text, setLogOut, close }) => {
       icon: <SettingsIcon />,
       link: "/dashboard/settings",
     },
+    {
+      text: "Courses",
+      icon: <BookOpenIcon />,
+      link: "/dashboard/courses",
+    },
   ];
   const list_sub = [
     {

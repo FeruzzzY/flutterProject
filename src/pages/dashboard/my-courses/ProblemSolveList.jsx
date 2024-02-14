@@ -161,7 +161,6 @@ const ProblemSolveList = () => {
         <p className={`font-bold md:text-2xl text-lg mb-4`}>
           Matter for this lesson
         </p>
-
         <CardRounded16>
           <TextSize20>{t("tab_courses.problems")}</TextSize20>
           <Table
