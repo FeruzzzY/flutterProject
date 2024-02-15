@@ -9,7 +9,7 @@ const Notifications = () => {
   return (
     <div>
       <NavigationDashboard title={t("sidebar_links.notifications")} />
-      <div className="lg:mt-[90px] mt-[60px] p-6">
+      <div className="lg:mt-[90px] mt-[60px] py-5 px-3.5">
         <div className="grid grid-cols-5 w-full justify-center md:gap-7 items-start gap-0">
           <CardRounded16 className="md:col-span-3 col-span-5">
             <TextSize20>Change your password</TextSize20>

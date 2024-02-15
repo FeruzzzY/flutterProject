@@ -15,7 +15,7 @@ const Payments = () => {
   return (
     <>
       <NavigationDashboard title={t("sidebar_links.payments")} />
-      <div className="lg:mt-[90px] mt-[60px] p-6">
+      <div className="lg:mt-[90px] mt-[60px] py-5 px-3.5">
         <CardRounded16>
           <TextSize20>Payment schedule</TextSize20>
           <Table

@@ -49,7 +49,10 @@ const UlLinks = ({ link, text, setLogOut, close }) => {
   ];
   return (
     <div>
-      <ul className="flex flex-col w-full mt-6 !h-[calc(100vh_-_252px)] overflow-y-auto overflow-x-hidden">
+      <ul
+        className="flex flex-col w-full mt-4 !h-[calc(100vh_-_230px)] overflow-y-auto overflow-x-hidden
+      px-2 py-2"
+      >
         <li className="w-full my-1">
           <NavLink
             end
@@ -83,7 +86,7 @@ const UlLinks = ({ link, text, setLogOut, close }) => {
           );
         })}
       </ul>
-      <ul className="flex flex-col w-full mt-2">
+      <ul className="flex flex-col w-full p-2">
         {list_sub?.map((item, index) => {
           const { text, icon, link } = item;
           return (

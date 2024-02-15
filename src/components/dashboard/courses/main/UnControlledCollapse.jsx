@@ -6,7 +6,6 @@ const UnControlledCollapse = ({
   activeIndex,
   index,
   toggleAccordion,
-  item_sub,
 }) => {
   return (
     <div className="border-b border-gray last-of-type:border-b-0">

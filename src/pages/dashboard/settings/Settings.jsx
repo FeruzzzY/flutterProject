@@ -32,7 +32,7 @@ const Settings = () => {
   return (
     <div>
       <NavigationDashboard title={t("sidebar_links.settings")} />
-      <div className="lg:mt-[90px] mt-[60px] p-6">
+      <div className="lg:mt-[90px] mt-[60px] py-5 px-3.5">
         <div className="flex flex-col p-6 bg-white rounded-2xl border border-solid border-gray md:max-w-[760px] max-w-full max-md:px-5">
           <TextSize20>Profile information</TextSize20>
 

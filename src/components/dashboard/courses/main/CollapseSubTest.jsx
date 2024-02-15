@@ -1,6 +1,5 @@
 import React from "react";
 import CollapseTaskIcon from "../../../icons/CollapseTaskIcon";
-import CollapseWatchIcon from "../../../icons/CollapseWatchIcon";
 
 const CollapseSubTest = () => {
   return (

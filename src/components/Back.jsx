@@ -7,7 +7,8 @@ const Back = ({ link }) => {
     <div>
       <Link
         to={link}
-        className="inline-flex gap-2 mb-6 items-center text-grayDark font-semibold text-sm"
+        className="inline-flex gap-2 mb-6 items-center text-grayDark font-semibold text-sm
+        hover:text-dark duration-200"
       >
         <BackIcon />
         <span>Back</span>

@@ -5,18 +5,18 @@ import { useState } from "react";
 import { NavigationDashboard } from "../../../components/dashboard-layout";
 import {
   CollapseSubTask,
-  CollapseSubTest,
   CollapseSubText,
   CollapseSubVideo,
   CoursesHeader,
   CoursesUncontrolledHeader,
   UnControlledCollapse,
 } from "../../../components/dashboard/courses/main";
+import CourseProgram from "../../../components/dashboard/courses/course_single/course_program/CourseProgram";
+import { Link } from "react-router-dom";
 
 const Courses = () => {
   const [coursesList, setCoursesList] = useState([
     {
-      id: 1,
       title: "Dart courses",
       progress_course: "40",
       modules: [
@@ -41,7 +41,6 @@ const Courses = () => {
       ],
     },
     {
-      id: 2,
       title: "Flutter courses",
       progress_course: "0",
       modules: [
@@ -65,7 +64,7 @@ const Courses = () => {
   return (
     <>
       <NavigationDashboard title={t("sidebar_links.my_courses")} />
-      <div className="lg:mt-[90px] mt-[60px] p-6">
+      <div className="lg:mt-[90px] mt-[60px] p-3.5 pt-[1px]">
         {coursesList.map((item, index) => {
           return (
             <CardRounded16 key={index} className="select-none">
@@ -92,10 +91,15 @@ const Courses = () => {
                     }}
                   >
                     <div className="flex flex-col gap-8">
-                      <CollapseSubVideo />
-                      <CollapseSubTask />
-                      <CollapseSubTest />
-                      <CollapseSubText />
+                      <Link to="/dashboard/courses/video-part/:id">
+                        <CollapseSubVideo />
+                      </Link>
+                      <Link to="/dashboard/courses/task-part/:id">
+                        <CollapseSubTask />
+                      </Link>
+                      <Link to="/dashboard/courses/text-part/:id">
+                        <CollapseSubText />
+                      </Link>
                     </div>
                   </UnControlledCollapse>
                 );

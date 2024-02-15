@@ -7,7 +7,7 @@ const Dashboard = () => {
   return (
     <div>
       <NavigationDashboard title={t("sidebar_links.home")} />
-      <div className="lg:mt-[90px] mt-[60px] p-6">
+      <div className="lg:mt-[90px] mt-[60px] py-5 px-3.5">
         {t("sidebar_links.home")}
       </div>
     </div>

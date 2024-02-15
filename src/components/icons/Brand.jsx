@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Brand = (props) => {
   return (
-    <Link to="/" className="inline-block">
+    <Link to="/" className="inline-block p-5 pb-0">
       <svg
         className={props?.className}
         width="158"

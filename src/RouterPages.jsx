@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet, Route, Routes } from "react-router-dom";
 import { ProblemSolve, ProblemSolveList } from "./pages/dashboard/my-courses";
 import { PageNFound, PageNFoundDashboard } from "./components";
-import { DashboardLayout, Layout } from "./layout";
+import { DashboardCourseLayout, DashboardLayout, Layout } from "./layout";
 import { Home, Ui } from "./pages/client";
 import Dashboard from "./pages/dashboard/Dashboard";
 import { Certificates } from "./pages/dashboard/certificates";
@@ -11,7 +11,12 @@ import { Settings } from "./pages/dashboard/settings";
 import { Help } from "./pages/dashboard/help";
 import Login from "./pages/client/auth/Login";
 import Notifications from "./pages/dashboard/notifications/Notifications";
-import Courses from "./pages/dashboard/courses/Courses";
+import {
+  Courses,
+  TaskPart,
+  TextPart,
+  VideoPart,
+} from "./pages/dashboard/courses";
 
 const RouterPages = () => {
   return (
@@ -38,7 +43,28 @@ const RouterPages = () => {
           }
         >
           <Route index element={<Dashboard />} />
-          <Route path="courses" element={<Courses />} />
+
+          <Route path="courses">
+            <Route index element={<Courses />} />
+            <Route
+              element={
+                <DashboardCourseLayout>
+                  <Outlet />
+                </DashboardCourseLayout>
+              }
+            >
+              <Route path="video-part/:id">
+                <Route index element={<VideoPart />} />
+              </Route>
+              <Route path="task-part/:id">
+                <Route index element={<TaskPart />} />
+              </Route>
+              <Route path="text-part/:id">
+                <Route index element={<TextPart />} />
+              </Route>
+            </Route>
+          </Route>
+
           <Route path="problem-solve">
             <Route index element={<ProblemSolveList />} />
             <Route path=":id">
@@ -49,15 +75,19 @@ const RouterPages = () => {
           <Route path="certificates">
             <Route index element={<Certificates />} />
           </Route>
+
           <Route path="payments">
             <Route index element={<Payments />} />
           </Route>
+
           <Route path="settings">
             <Route index element={<Settings />} />
           </Route>
+
           <Route path="help">
             <Route index element={<Help />} />
           </Route>
+
           <Route path="notifications">
             <Route index element={<Notifications />} />
           </Route>
