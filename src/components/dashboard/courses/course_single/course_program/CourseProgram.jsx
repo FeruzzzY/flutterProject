@@ -1,14 +1,15 @@
 import React, { useLayoutEffect } from "react";
 import { useState } from "react";
-import UnControlledCollapseProgram from "./UnControlledCollapseProgram";
-import CoursesUncontrolledHeaderProgram from "./CoursesUncontrolledHeaderProgram";
-import CardRounded16 from "../../../../cards/CardRounded16";
 import { useTranslation } from "react-i18next";
-import CourseProgramVideo from "./CourseProgramVideo";
-import CourseProgramTask from "./CourseProgramTask";
-import CourseProgramText from "./CourseProgramText";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
+import {
+  CourseProgramTask,
+  CourseProgramText,
+  CourseProgramVideo,
+  CoursesUncontrolledHeaderProgram,
+  UnControlledCollapseProgram,
+} from "./";
 
 const CourseProgram = () => {
   const [coursesList, setCoursesList] = useState([
@@ -17,36 +18,6 @@ const CourseProgram = () => {
     },
     {
       title: "Dart Syntax I",
-    },
-    {
-      title: "Dart Syntax II",
-    },
-    {
-      title: "Dart Syntax II",
-    },
-    {
-      title: "Dart Syntax II",
-    },
-    {
-      title: "Dart Syntax II",
-    },
-    {
-      title: "Dart Syntax II",
-    },
-    {
-      title: "Dart Syntax II",
-    },
-    {
-      title: "Dart Syntax II",
-    },
-    {
-      title: "Dart Syntax II",
-    },
-    {
-      title: "Dart Syntax II",
-    },
-    {
-      title: "Dart Syntax II",
     },
     {
       title: "Dart Syntax II",
@@ -86,7 +57,7 @@ const CourseProgram = () => {
       >
         <p
           className="flex justify-between items-center md:pb-4 pb-2 
-         text-sm md:text-xl font-bold text-black"
+         text-sm md:text-xl font-bold text-black md:cursor-auto cursor-pointer"
           onClick={() => {
             if (windowSize?.width <= 768) {
               setMenu(!menu);

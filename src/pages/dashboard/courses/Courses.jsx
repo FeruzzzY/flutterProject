@@ -11,8 +11,8 @@ import {
   CoursesUncontrolledHeader,
   UnControlledCollapse,
 } from "../../../components/dashboard/courses/main";
-import CourseProgram from "../../../components/dashboard/courses/course_single/course_program/CourseProgram";
 import { Link } from "react-router-dom";
+import { CourseChat } from "../../../components/dashboard/courses/course_single/course_chat";
 
 const Courses = () => {
   const [coursesList, setCoursesList] = useState([

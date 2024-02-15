@@ -3,6 +3,7 @@ import React from "react";
 const AvatarIcon = (props) => {
   return (
     <svg
+      {...props}
       width="48"
       height="48"
       viewBox="0 0 48 48"

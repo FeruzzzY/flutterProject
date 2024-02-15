@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import CourseProgram from "../components/dashboard/courses/course_single/course_program/CourseProgram";
 import { NavigationDashboard } from "../components/dashboard-layout";
 import { useTranslation } from "react-i18next";
+import { CourseProgram } from "../components/dashboard/courses/course_single/course_program";
+import { CourseChat } from "../components/dashboard/courses/course_single/course_chat";
 
 const DashboardCourseLayout = ({ children }) => {
   const { t } = useTranslation();
@@ -25,6 +26,7 @@ const DashboardCourseLayout = ({ children }) => {
           top-[65px] w-full md:rounded-2xl rounded-none overflow-hidden md:order-2 order-1"
         >
           <CourseProgram />
+          {/* <CourseChat /> */}
         </div>
       </div>
     </>
