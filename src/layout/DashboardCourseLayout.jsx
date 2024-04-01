@@ -25,8 +25,8 @@ const DashboardCourseLayout = ({ children }) => {
           className="md:w-[300px] fixed md:right-[24px] md:left-auto left-0 md:top-auto 
           top-[65px] w-full md:rounded-2xl rounded-none overflow-hidden md:order-2 order-1"
         >
-          <CourseProgram />
-          {/* <CourseChat /> */}
+          {/* <CourseProgram /> */}
+          <CourseChat />
         </div>
       </div>
     </>

@@ -8,7 +8,7 @@ import CollapseClockIcon from "../../../icons/CollapseClockIcon";
 const CoursesUncontrolledHeader = ({ activeIndex, item_sub, index }) => {
   return (
     <>
-      <div className="flex items-center justify-between flex-wrap gap-4">
+      <div className="flex items-center justify-between  gap-4">
         <div className="flex flex-col gap-3 items-start flex-wrap">
           <div className="flex gap-3">
             <p
@@ -22,7 +22,7 @@ const CoursesUncontrolledHeader = ({ activeIndex, item_sub, index }) => {
             }
             `}
             >
-              {item_sub?.m_title}
+              {item_sub?.name}
             </p>
             {item_sub?.lock ? (
               <div
@@ -36,14 +36,16 @@ const CoursesUncontrolledHeader = ({ activeIndex, item_sub, index }) => {
             ) : null}
           </div>
           <p className="text-base font-semibold text-black">
-            {item_sub?.m_sub_title}
+            {item_sub?.description}
           </p>
         </div>
         <div className="flex items-center gap-3">
           <div className="w-[48px]">
             <CircularProgressbar
-              value={item_sub?.progress_module}
-              text={`${item_sub?.progress_module}%`}
+              value={33}
+              text={`${33}%`}
+              // value={item_sub?.progress_module}
+              // text={`${item_sub?.progress_module}%`}
               styles={buildStyles({
                 strokeLinecap: "butt",
                 textColor: "#23262F",
