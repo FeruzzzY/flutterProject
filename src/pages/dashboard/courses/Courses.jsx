@@ -15,8 +15,99 @@ import {
 import { Link } from "react-router-dom";
 import { CourseChat } from "../../../components/dashboard/courses/course_single/course_chat";
 import { IMG_URL } from "../../../helpers/api";
+import { useDispatch, useSelector } from "react-redux";
+import { setCoursesList, setLoading } from "../../../redux";
 
 const Courses = () => {
+  const [coursesList1, setCoursesList1] = useState([
+    {
+      title: "Dart courses",
+      progress_course: "40",
+      modules: [
+        {
+          m_title: "Module 1",
+          m_sub_title: "The first part of Dart courses",
+          progress_module: "30",
+          lock: false,
+        },
+        {
+          m_title: "Module 2",
+          m_sub_title: "The first part of Dart courses",
+          progress_module: "0",
+          lock: false,
+        },
+        {
+          m_title: "Module 3",
+          m_sub_title: "The first part of Dart courses",
+          progress_module: "0",
+          lock: true,
+        },
+      ],
+    },
+    {
+      title: "Flutter courses",
+      progress_course: "0",
+      modules: [
+        {
+          m_title: "Module 1",
+          m_sub_title: "The first part of Flutter courses",
+          progress_module: "0",
+          lock: true,
+        },
+      ],
+    },
+  ]);
+  const [activeIndex, setActiveIndex] = useState(null);
+
+  const toggleAccordion = (index) => {
+    setActiveIndex(activeIndex === index ? null : index);
+  };
+
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const { courses_list } = useSelector((state) => state);
+
+  useEffect(() => {
+    getCoursesList();
+  }, []);
+
+  const getCoursesList = () => {
+    dispatch(setLoading(true));
+    GetAuthInstance()
+      .get(`/api/v1/course/`)
+      .then((res) => {
+        console.log(res.data.data.data);
+        let data = res?.data?.data?.data;
+        // setList(res.data.data.data);
+        dispatch(setCoursesList(data));
+      })
+      .catch((error) => {
+        dispatch(setCoursesList([]));
+      })
+      .finally(() => {
+        dispatch(setLoading(false));
+      });
+  };
+
+  // *****************************************
+
+  // const [list, setList] = useState([]);
+
+  // useEffect(() => {
+  //   getList();
+  // }, []);
+
+  // const getList = () => {
+  //   GetAuthInstance()
+  //     .get(`/api/v1/course/`)
+  //     .then((res) => {
+  //       setList(res.data.data.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log("Error", err);
+  //     });
+  // };
+
   // const [coursesList, setCoursesList] = useState([
   //   {
   //     title: "Dart courses",
@@ -63,81 +154,16 @@ const Courses = () => {
 
   // const { t } = useTranslation();
 
-  // *****************************************
-
-  const [list, setList] = useState([]);
-
-  useEffect(() => {
-    getList();
-  }, []);
-
-  const getList = () => {
-    GetAuthInstance()
-      .get(`/api/v1/course/`)
-      .then((res) => {
-        setList(res.data.data.data);
-      })
-      .catch((err) => {
-        console.log("Error", err);
-      });
-  };
-
-  const [coursesList, setCoursesList] = useState([
-    {
-      title: "Dart courses",
-      progress_course: "40",
-      modules: [
-        {
-          m_title: "Module 1",
-          m_sub_title: "The first part of Dart courses",
-          progress_module: "30",
-          lock: false,
-        },
-        {
-          m_title: "Module 2",
-          m_sub_title: "The first part of Dart courses",
-          progress_module: "0",
-          lock: false,
-        },
-        {
-          m_title: "Module 3",
-          m_sub_title: "The first part of Dart courses",
-          progress_module: "0",
-          lock: true,
-        },
-      ],
-    },
-    {
-      title: "Flutter courses",
-      progress_course: "0",
-      modules: [
-        {
-          m_title: "Module 1",
-          m_sub_title: "The first part of Flutter courses",
-          progress_module: "0",
-          lock: true,
-        },
-      ],
-    },
-  ]);
-  const [activeIndex, setActiveIndex] = useState(null);
-
-  const toggleAccordion = (index) => {
-    setActiveIndex(activeIndex === index ? null : index);
-  };
-
-  const { t } = useTranslation();
-
   return (
     <>
-      {/* <NavigationDashboard title={t("sidebar_links.my_courses")} />
+      <NavigationDashboard title={t("sidebar_links.my_courses")} />
       <div className="lg:mt-[90px] mt-[60px] p-3.5 pt-[1px]">
-        {coursesList.map((item, index) => {
+        {courses_list.map((item, index) => {
           return (
             <CardRounded16 key={index} className="select-none">
               <CoursesHeader item={item} />
 
-              {item?.modules?.map((item_sub, index_sub) => {
+              {item?.sections?.map((item_sub, index_sub) => {
                 return (
                   <UnControlledCollapse
                     key={`${index}_${index_sub}`}
@@ -158,7 +184,8 @@ const Courses = () => {
                     }}
                   >
                     <div className="flex flex-col gap-8">
-                      <Link to="/dashboard/courses/video-part/:id">
+                      sss
+                      {/* <Link to="/dashboard/courses/video-part/:id">
                         <CollapseSubVideo />
                       </Link>
                       <Link to="/dashboard/courses/task-part/:id">
@@ -166,7 +193,7 @@ const Courses = () => {
                       </Link>
                       <Link to="/dashboard/courses/text-part/:id">
                         <CollapseSubText />
-                      </Link>
+                      </Link> */}
                     </div>
                   </UnControlledCollapse>
                 );
@@ -174,11 +201,11 @@ const Courses = () => {
             </CardRounded16>
           );
         })}
-      </div> */}
+      </div>
 
       {/* **************************************** */}
 
-      <NavigationDashboard title={t("sidebar_links.my_courses")} />
+      {/* <NavigationDashboard title={t("sidebar_links.my_courses")} />
       <div className="lg:mt-[90px] mt-[60px] p-3.5 pt-[1px]">
         {coursesList.map((item, index) => {
           return (
@@ -269,7 +296,7 @@ const Courses = () => {
             </Link>
           );
         })}
-      </div>
+      </div> */}
     </>
   );
 };
