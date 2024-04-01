@@ -17,6 +17,7 @@ import {
   TextPart,
   VideoPart,
 } from "./pages/dashboard/courses";
+import CourPart from "./pages/dashboard/courses/CourParts";
 
 const RouterPages = () => {
   return (
@@ -61,6 +62,12 @@ const RouterPages = () => {
               </Route>
               <Route path="text-part/:id">
                 <Route index element={<TextPart />} />
+              </Route>
+              <Route path=":slug">
+                <Route index element={<CourPart />} />
+                {/* <Route path=":inSlug">
+                  <Route index element={<InCourt />} />
+                </Route> */}
               </Route>
             </Route>
           </Route>

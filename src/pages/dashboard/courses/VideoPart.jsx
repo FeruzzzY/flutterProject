@@ -5,7 +5,7 @@ const VideoPart = () => {
   return (
     <div>
       <Back link="/dashboard/courses" />
-      <div>VideoPart</div>
+      <div>VideoParteee</div>
     </div>
   );
 };
