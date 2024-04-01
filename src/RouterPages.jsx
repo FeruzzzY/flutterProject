@@ -18,11 +18,13 @@ import {
   VideoPart,
 } from "./pages/dashboard/courses";
 import CourPart from "./pages/dashboard/courses/CourParts";
+import Comments from "./pages/dashboard/Comments";
 
 const RouterPages = () => {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
+      <Route path="/comments" element={<Comments />} />
       <Route
         element={
           <Layout>
@@ -43,6 +45,7 @@ const RouterPages = () => {
             </DashboardLayout>
           }
         >
+          <Route path="comments" element={<Comments />} />
           <Route index element={<Dashboard />} />
 
           <Route path="courses">
