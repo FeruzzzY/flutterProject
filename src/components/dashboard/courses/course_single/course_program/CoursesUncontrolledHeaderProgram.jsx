@@ -9,7 +9,7 @@ const CoursesUncontrolledHeaderProgram = ({ activeIndex, item_sub, index }) => {
         <div>
           {activeIndex === index ? <CollapseMinusIcon /> : <CollapsePlusIcon />}
         </div>
-        <p className="text-sm font-medium text-black">{item_sub?.title}</p>
+        <p className="text-sm font-medium text-black">{item_sub?.name}</p>
       </div>
     </>
   );

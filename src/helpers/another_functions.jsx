@@ -9,3 +9,15 @@ export const formatBytes = (bytes, decimals = 2) => {
 
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
 };
+
+export const convertMilliseconds = (milliseconds) => {
+  const hours = Math.floor(milliseconds / (1000 * 60 * 60));
+  const minutes = Math.floor((milliseconds % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((milliseconds % (1000 * 60)) / 1000);
+
+  return {
+    hours: hours,
+    minutes: minutes,
+    seconds: seconds,
+  };
+};

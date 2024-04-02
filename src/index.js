@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import store from "./redux/store";
 import App from "./App";
 import "./index.css";
+import "./plyr.css";
 import reportWebVitals from "./reportWebVitals";
 import "toastr/build/toastr.min.css";
 

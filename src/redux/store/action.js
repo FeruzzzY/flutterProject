@@ -1,4 +1,11 @@
-import { COURSES_LIST, CATEGORIES, LOADING, SET_LAN } from "./types";
+import { GET_USER, COURSES_LIST, CATEGORIES, LOADING, SET_LAN } from "./types";
+
+export const setGetUser = (get_user) => {
+  return {
+    type: GET_USER,
+    get_user,
+  };
+};
 
 export const setCoursesList = (courses_list) => {
   return {

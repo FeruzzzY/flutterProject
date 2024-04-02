@@ -10,19 +10,16 @@ import {
   CoursesUncontrolledHeaderProgram,
   UnControlledCollapseProgram,
 } from "./";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setLoading } from "../../../../../redux";
+import { GetAuthInstance } from "../../../../../helpers/httpClient";
+import { useEffect } from "react";
 
 const CourseProgram = () => {
-  const [coursesList, setCoursesList] = useState([
-    {
-      title: "Introduction",
-    },
-    {
-      title: "Dart Syntax I",
-    },
-    {
-      title: "Dart Syntax II",
-    },
-  ]);
+  const { courses_slug, courses_id, c_item_sub_index, c_child_s_id } =
+    useParams();
+  const [programList, setProgramList] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [menu, setMenu] = useState(false);
   const [windowSize, setWindowSize] = useState({
@@ -31,6 +28,7 @@ const CourseProgram = () => {
   });
 
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   useLayoutEffect(() => {
     const updateSize = () => {
@@ -46,6 +44,27 @@ const CourseProgram = () => {
 
   const toggleAccordion = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
+  };
+
+  useEffect(() => {
+    getCourseProgram();
+    setActiveIndex(c_item_sub_index);
+  }, []);
+
+  const getCourseProgram = () => {
+    dispatch(setLoading(true));
+    GetAuthInstance()
+      .get(`/api/v1/course/sections?slug=${courses_slug}`)
+      .then((res) => {
+        let data = res?.data?.data;
+        setProgramList(data);
+      })
+      .catch((error) => {
+        setProgramList([]);
+      })
+      .finally(() => {
+        dispatch(setLoading(false));
+      });
   };
 
   return (
@@ -85,7 +104,7 @@ const CourseProgram = () => {
               : "md:block hidden"
           }
         >
-          {coursesList?.map((item_sub, index_sub) => {
+          {programList?.map((item_sub, index_sub) => {
             return (
               <UnControlledCollapseProgram
                 key={index_sub}
@@ -93,35 +112,58 @@ const CourseProgram = () => {
                   <CoursesUncontrolledHeaderProgram
                     item_sub={item_sub}
                     index={index_sub}
-                    activeIndex={activeIndex}
+                    activeIndex={Number(activeIndex)}
                   />
                 }
                 item_sub={item_sub}
                 index={index_sub}
-                activeIndex={activeIndex}
+                activeIndex={Number(activeIndex)}
                 toggleAccordion={() => toggleAccordion(index_sub)}
               >
-                <div className="flex flex-col gap-4 pl-8 pt-2.5">
-                  <CourseProgramVideo
-                    color="#2A85FF"
-                    color2="#E8F7FA"
-                    title="What is programming?"
-                    time="22:11"
-                  />
-                  <CourseProgramVideo title="About Flutter" time="22:11" />
-                  <CourseProgramVideo
-                    title="Write code in flutter language"
-                    time="22:11"
-                  />
-                  <CourseProgramTask
-                    title="Matter for this lesson"
-                    info="Easy"
-                  />
-                  <CourseProgramText
-                    title="Create E-Commerce app"
-                    info="Easy"
-                  />
-                </div>
+                {item_sub?.childs?.map((ch, index_ch) => {
+                  return (
+                    <div key={index_ch}>
+                      {ch?.lessons?.length > 0 && (
+                        <div className="flex flex-col gap-4 pl-8 pt-2.5">
+                          {ch?.lessons[0]?.lesson_type === 1 ? (
+                            <Link
+                              to={`/dashboard/courses/video-part/${courses_slug}/${courses_id}/${index_sub}/${ch?.id}`}
+                            >
+                              <CourseProgramVideo
+                                color={
+                                  ch?.id === Number(c_child_s_id)
+                                    ? "#2A85FF"
+                                    : ""
+                                }
+                                color2={
+                                  ch?.id === Number(c_child_s_id)
+                                    ? "#E8F7FA"
+                                    : ""
+                                }
+                                title={ch?.lessons[0]?.name}
+                                time="22:11"
+                              />
+                            </Link>
+                          ) : ch?.lessons[0]?.lesson_type === 3 ? (
+                            <Link to="/dashboard/courses/task-part/:id">
+                              <CourseProgramTask
+                                title={ch?.lessons[0]?.name}
+                                info="Easy"
+                              />
+                            </Link>
+                          ) : ch?.lessons[0]?.lesson_type === 4 ? (
+                            <Link to="/dashboard/courses/text-part/:id">
+                              <CourseProgramText
+                                title={ch?.lessons[0]?.name}
+                                info="Easy"
+                              />
+                            </Link>
+                          ) : null}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </UnControlledCollapseProgram>
             );
           })}

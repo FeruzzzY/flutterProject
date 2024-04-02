@@ -1,8 +1,10 @@
 import React from "react";
 import CollapsePlayIcon from "../../../icons/CollapsePlayIcon";
 import CollapseWatchIcon from "../../../icons/CollapseWatchIcon";
+import { convertMilliseconds } from "../../../../helpers/another_functions";
 
-const CollapseSubVideo = () => {
+const CollapseSubVideo = ({ f_lesson }) => {
+  const time = convertMilliseconds(f_lesson?.video_link?.expires);
   return (
     <div className="group flex justify-between items-center cursor-pointer w-full gap-3 md:border-0 border border-gray md:rounded-none rounded-xl md:p-0 p-2">
       <div className="flex md:flex-row flex-col items-center gap-3 w-full">
@@ -36,21 +38,25 @@ const CollapseSubVideo = () => {
              text-grayDark bg-transparent
             `}
               >
-                Lesson:01
+                {f_lesson?.desc}
               </p>
               <div className="md:hidden gap-1 items-center flex mb-2">
                 <CollapseWatchIcon />
-                <p className="text-sm font-medium text-grayDark">22:15</p>
+                <p className="text-sm font-medium text-grayDark">
+                  {time.hours}:{time.minutes}:{time.seconds}
+                </p>
               </div>
             </div>
             <p className="text-base font-semibold text-black line-clamp-3">
-              The first part of Dart courses
+              {f_lesson?.name}
             </p>
           </div>
         </div>
         <div className="md:flex gap-1 items-center hidden">
           <CollapseWatchIcon />
-          <p className="text-sm font-medium text-grayDark">22:15</p>
+          <p className="text-sm font-medium text-grayDark">
+            {time.hours}:{time.minutes}:{time.seconds}
+          </p>
         </div>
       </div>
     </div>

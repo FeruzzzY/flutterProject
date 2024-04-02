@@ -1,8 +1,9 @@
-import { COURSES_LIST, CATEGORIES, LOADING, SET_LAN } from "./types";
+import { GET_USER, COURSES_LIST, CATEGORIES, LOADING, SET_LAN } from "./types";
 
 const initialState = {
   courses_list: [],
   categories: [],
+  get_user: {},
   loading: false,
   lan: "UZ",
 };
@@ -17,6 +18,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         categories: action.categories,
+      };
+    case GET_USER:
+      return {
+        ...state,
+        get_user: action.get_user,
       };
     case LOADING:
       return {
