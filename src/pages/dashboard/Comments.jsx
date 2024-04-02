@@ -194,15 +194,18 @@ const Comments = () => {
         ))}
       </div>
 
-      <div className="flex justify-between bg-white rounded-3xl border border-gray select-none p-6">
+      <div className="flex -mt-1 justify-between items-center bg-white rounded-2xl border border-gray select-none p-2">
         <div className="flex gap-3">
           <div>
             <BlueReplyIcon />
           </div>
           <div>
-            <p>
-              Replied to <span>Muzaffar Fozilov</span>
-              <p>In the ever-evolving landscape of programming languages...</p>
+            <p className="text-sm font-semibold">
+              Replied to 
+              <span className="text-[#2A85FF]">Muzaffar Fozilov</span>
+              <p className="text-base font-normal">
+                In the ever-evolving landscape of programming languages...
+              </p>
             </p>
           </div>
         </div>
