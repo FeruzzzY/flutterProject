@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { API_URL } from './api';
-import { getToken } from './tokenStorage';
-import { getLanguage } from './language';
+import axios from "axios";
+import { API_URL } from "./api";
+import { getToken } from "./tokenStorage";
+import { getLanguage } from "./language";
 
 export const GetNotAuthInstance = () => {
   const lan = getLanguage();
@@ -29,7 +29,7 @@ export const GetAuthInstance = () => {
   const defaultOptions = {
     baseURL: API_URL,
     headers: {
-      Authorization: token ? `Bearer ${token}` : '',
+      Authorization: token ? `Bearer ${token}` : "",
     },
     params: {
       lan: lan,

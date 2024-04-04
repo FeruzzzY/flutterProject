@@ -4,6 +4,7 @@ import GlobusIcon from "../icons/GlobusIcon";
 import LogOutIcon from "../icons/LogOutIcon";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const NavDropDown = ({
   open,
@@ -14,6 +15,8 @@ const NavDropDown = ({
 }) => {
   const dropdownRef = useRef(null);
   const { t } = useTranslation();
+
+  const { get_user } = useSelector((state) => state);
 
   useEffect(() => {
     // Function to handle click outside the dropdown
@@ -57,7 +60,7 @@ const NavDropDown = ({
           >
             <div className="flex gap-3 items-center border-b border-b-gray p-4">
               <AvatarIcon />
-              <p className="text-base font-bold text-black">Yarbek</p>
+              <p className="text-base font-bold text-black">{get_user?.name}</p>
             </div>
             <Link
               to={cabinetTrue ? `/` : `/dashboard/settings`}

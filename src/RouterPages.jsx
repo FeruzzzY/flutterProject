@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet, Route, Routes } from "react-router-dom";
 import { ProblemSolve, ProblemSolveList } from "./pages/dashboard/my-courses";
 import { PageNFound, PageNFoundDashboard } from "./components";
@@ -18,9 +18,27 @@ import {
   VideoPart,
 } from "./pages/dashboard/courses";
 import CourPart from "./pages/dashboard/courses/CourParts";
+
 import Comments from "./pages/dashboard/Comments";
 
+import { GetAuthInstance } from "./helpers/httpClient";
+import { setGetUser } from "./redux";
+import { useDispatch } from "react-redux";
+
 const RouterPages = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  const getUser = () => {
+    GetAuthInstance()
+      .get(`/api/v1/me`)
+      .then((res) => {
+        dispatch(setGetUser(res.data));
+      });
+  };
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
@@ -57,21 +75,21 @@ const RouterPages = () => {
                 </DashboardCourseLayout>
               }
             >
-              <Route path="video-part/:id">
+              <Route path="video-part/:courses_slug/:courses_id/:c_item_sub_index/:c_child_s_id/">
                 <Route index element={<VideoPart />} />
               </Route>
-              <Route path="task-part/:id">
+              <Route path="task-part/:courses_slug/:courses_id/:c_item_sub_index/:c_child_s_id/">
                 <Route index element={<TaskPart />} />
               </Route>
-              <Route path="text-part/:id">
+              <Route path="text-part/:courses_slug/:courses_id/:c_item_sub_index/:c_child_s_id/">
                 <Route index element={<TextPart />} />
               </Route>
-              <Route path=":slug">
+              {/* <Route path=":slug">
                 <Route index element={<CourPart />} />
-                {/* <Route path=":inSlug">
+                <Route path=":inSlug">
                   <Route index element={<InCourt />} />
-                </Route> */}
-              </Route>
+                </Route>
+              </Route> */}
             </Route>
           </Route>
 

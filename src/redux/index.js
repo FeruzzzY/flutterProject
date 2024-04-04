@@ -1,19 +1,7 @@
 export {
-  setVillages,
-  setVillageReviews,
-  setNewVillageReview,
-  setHotelReviews,
-  setNewHotelReview,
-  setRestaurantReviews,
-  setNewRestaurantReview,
-  setFamousReviews,
-  setNewFamousReview,
-  setTourReviews,
-  setNewTourReview,
-  setCraftReviews,
-  setNewCraftReview,
+  setCoursesList,
   setCategories,
+  setGetUser,
   setLoading,
   setLan,
-  setStaticWord,
-} from './store/action';
+} from "./store/action";
